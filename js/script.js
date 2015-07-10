@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+
   $('body').on('click', 'span[class^="word"]', function(e) {
     var selectedText = this.innerText;
     $(this).addClass("highlight");

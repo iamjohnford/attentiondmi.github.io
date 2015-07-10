@@ -62,10 +62,12 @@ body, html {
   padding: 0px auto;
 }
 
+span[class^="word"]{
+    cursor: pointer;
+}
 .highlight {
   font-weight: bold;
   background: yellow;
-  cursor: pointer;
 }
 
 div#dv_transcript_korean {

@@ -9,12 +9,15 @@ $(document).ready(function() {
   $('body').on('click', '.highlight', function() {
     currentlySelectedWord = this;
 
+    var wordToLookup = this.innerHTML;
+    wordToLookup = wordToLookup.replace(/(?:[\(\)\-&$#!?\[\]{}\"\',\.]+(?:\s|$)|(?:^|\s)[\(\)\-&$#!?\[\]{}\"\',\.]+)/g, ' ').trim();
+
     if (!dvPlayer.paused()) {
       pauseAudio();
       playerWasPlayingAndIsNowTemporarilyPaused = true;
     }
 
-    showDictionary(this.innerHTML);
+    showDictionary(wordToLookup);
   });
 
 

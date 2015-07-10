@@ -1,5 +1,5 @@
 $(document).ready(function() {
-
+  currentlySelectedWord = "";
 
   $('body').on('click', 'span[class^="word"]', function(e) {
     var selectedText = this.innerText;
@@ -7,6 +7,7 @@ $(document).ready(function() {
   });
 
   $('body').on('click', '.highlight', function() {
+    currentlySelectedWord = this;
     $("#dv_definitions").show();
     var definitionURL = "http://dic.daum.net/search.do?q=" + this.innerHTML + "&dic=ee";
     $("#dv_definitions_content").html("<iframe target='_top' width='100%' height='100%' src=" + definitionURL + "></iframe>");
@@ -30,6 +31,14 @@ $(document).ready(function() {
     e.preventDefault();
   });
 
+  $(".submit_definition_button").click(function(e) {
+    var defn = $("#submit_definition_box").val();
 
+    console.log("Going to add tooltip to " + currentlySelectedWord);
+
+    $(currentlySelectedWord).tooltipster({
+      content: $('<span>' + defn + '</span>')
+    });
+  });
 
 });

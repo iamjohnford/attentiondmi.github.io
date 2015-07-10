@@ -8,6 +8,8 @@
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <link href="css/main.css" rel="stylesheet">
   <link href="http://fonts.googleapis.com/earlyaccess/nanumgothic.css" media="all" rel="stylesheet" type="text/css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tooltipster/3.0.5/css/tooltipster.min.css" media="all" rel="stylesheet" type="text/css" />
+
 </head>
 
 <body>
@@ -19,6 +21,10 @@
     <div id="dv_definitions" style="display:none;">
       <a href='#' id='dv_definitions_close_button'>Hide Dictionary (X)</a>
       <div id="dv_definitions_content">This is where definitions will go</div>
+      <div id="dv_definitions_userentry">
+        <input type="text" id = "submit_definition_box" class="submit_definition_box" placeholder="Type your own definition here"></input>
+        <input type="submit" class="submit_definition_button"></input>
+      </div>
     </div>
     <div id="content">
       <div id="dv_transcript_korean">
@@ -54,6 +60,7 @@
   <script type="text/javascript" src="js/script.js"></script>
   <script type="text/javascript" src="js/mediaplayer.js"></script>
   <script type="text/javascript" src="js/jquery.hotkeys.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tooltipster/3.0.5/js/jquery.tooltipster.min.js"></script>
 </body>
 
 </html>

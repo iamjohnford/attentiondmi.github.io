@@ -66,7 +66,6 @@ span[class^="word"]{
     cursor: pointer;
 }
 .highlight {
-  font-weight: bold;
   background: yellow;
 }
 
@@ -177,4 +176,23 @@ textarea .transcript {
 
 .player_control:hover {
   background: blue;
+}
+
+#dv_definitions_userentry{
+  position: fixed;
+  bottom: 0;
+  margin-bottom: 100px;
+  width: 100%;
+}
+.submit_definition_box {
+  width: 100%;
+  background-color: rgb(61, 65, 77);
+  color: white;
+  padding: 20px;
+  display:inline-block;
+  border:none;
+}
+
+.submit_definition_button {
+  display:inline-block;
 }

@@ -62,13 +62,18 @@ body, html {
   padding: 0px auto;
 }
 
-span[class^="word"]{
-    cursor: pointer;
+span[class^="word"] {
+  cursor: pointer;
 }
 
 span[class^="line"] {
   border-bottom: 1px solid silver;
   display: inline-block;
+  width: 100%;
+}
+
+span[class^="line"]:nth-child(even) {
+  background: rgb(254, 244, 244);
 }
 
 .highlight {
@@ -150,7 +155,7 @@ textarea .transcript {
 
 #content {
   padding: 40px;
-	padding-bottom:100px;
+  padding-bottom: 100px;
 }
 
 .the_media_player_div {
@@ -158,22 +163,23 @@ textarea .transcript {
 }
 
 #controls {
-	display:none;
+  display: none;
 }
+
 #footer {
   text-align: center;
   /*display:none;*/
   width: 100%;
   padding: 20px;
   position: fixed;
-	bottom: 0;
+  bottom: 0;
   background: rgb(61, 65, 77);
-	color:white;
-	font-family: arial, sans-serif;
+  color: white;
+  font-family: arial, sans-serif;
 }
 
-.copyright{
-	margin-top:20px;
+.copyright {
+  margin-top: 20px;
 }
 
 .player_control {
@@ -188,21 +194,22 @@ textarea .transcript {
   background: blue;
 }
 
-#dv_definitions_userentry{
+#dv_definitions_userentry {
   position: fixed;
   bottom: 0;
   margin-bottom: 100px;
   width: 100%;
 }
+
 .submit_definition_box {
   width: 100%;
   background-color: rgb(61, 65, 77);
   color: white;
   padding: 20px;
-  display:inline-block;
-  border:none;
+  display: inline-block;
+  border: none;
 }
 
 .submit_definition_button {
-  display:inline-block;
+  display: inline-block;
 }

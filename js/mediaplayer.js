@@ -1,3 +1,5 @@
+playerWasPlayingAndIsNowTemporarilyPaused = false;
+
 videojs("the_media", {}, function() {
   // Player (this) is initialized and ready.
   dvPlayer = this;
@@ -33,6 +35,11 @@ playPauseAudio = function() {
     dvPlayer.pause();
   }
 };
+
+pauseAudio = function() {
+  dvPlayer.pause();
+};
+
 
 skipNumSeconds = function(numSeconds) {
   var curTime = dvPlayer.currentTime();

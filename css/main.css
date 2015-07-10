@@ -65,8 +65,18 @@ body, html {
 span[class^="word"]{
     cursor: pointer;
 }
+
+span[class^="line"] {
+  border-bottom: 1px solid silver;
+  display: inline-block;
+}
+
 .highlight {
   background: yellow;
+}
+
+.hasDefinitionNow {
+  background: cyan;
 }
 
 div#dv_transcript_korean {

@@ -5,6 +5,8 @@ videojs("the_media", {}, function() {
   dvPlayer = this;
 
   dvPlayer.on('timeupdate', function() {
+    $(".percent_indicator").show();
+
     var percent = dvPlayer.currentTime() / dvPlayer.duration() * 100;
     var roundedPercent = Math.round(percent);
     // console.log("Percent done is: " + roundedPercent);
@@ -13,7 +15,7 @@ videojs("the_media", {}, function() {
     var newString = roundedPercent + "% Listened";
 
     if (oldString !== newString && percent > 0) {
-      $("#percent_done").html(newString);
+      $("#percent_done").html(" " + newString);
     }
   });
 });
@@ -34,8 +36,11 @@ playPauseAudio = function() {
   if (dvPlayer.paused()) {
     skipNumSeconds(-2);
     dvPlayer.play();
+    $('#control_playpause').html('<i id="play_pause_button" class="fa fa-pause faa-pulse animated"></i> Pause');
   } else {
     dvPlayer.pause();
+
+    $('#control_playpause').html('<i id="play_pause_button" class="fa fa-play-circle faa-wrench animated"></i> Play');
   }
 };
 

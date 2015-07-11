@@ -25,10 +25,12 @@ $(document).ready(function() {
     var transcript = $(this).attr("content");
     var value = transcript.replace(/\n/g, '<br />');
 
+    $(".dvIntroduction").hide();
     $("#dv_transcript_korean").html("<span class='dvSentence' language='ko'>" + value + "</span>");
 
     loadMediaPlayer();
 
+    console.log("About to show controls...");
     $("#controls").show();
 
     $(".dvSentence").lettering('lines').children('span').lettering('words');
@@ -79,20 +81,23 @@ $(document).ready(function() {
     var query = $('#filter').val();
 
     // var value = $(element).val().toLowerCase();
-        var $li = $(" li");
+    var $li = $(".sidebar li");
 
-        $li.hide();
-        $li.filter(function() {
-            return $(this).text().toLowerCase().indexOf(query) > -1;
-        }).show();
+    $li.hide();
+    $li.filter(function() {
+      return $(this).text().toLowerCase().indexOf(query) > -1;
+    }).show();
 
   });
 });
 
 var showDictionary = function(lookupWord) {
-  $("#dv_definitions").show();
+  // $("#dv_definitions").show();
   var definitionURL = "http://dic.daum.net/search.do?q=" + lookupWord + "&dic=ee";
-  $("#dv_definitions_content").html("<iframe target='_top' width='100%' height='100%' src=" + definitionURL + "></iframe>");
+  // $("#dv_definitions_content").html("<iframe target='_top' width='100%' height='100%' src=" + definitionURL + "></iframe>");
+  $(".control-sidebar").html("<h1>Loading Dictionary...</h1>");
+  $(".control-sidebar").html("<iframe target='_top' width='100%' height='100%' src=" + definitionURL + "></iframe>");
+  $("#open_right_sidebar").click();
 };
 
 var hideDictionary = function() {

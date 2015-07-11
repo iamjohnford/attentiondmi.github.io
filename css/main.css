@@ -12,10 +12,11 @@ span[class^="line"] {
   border-bottom: 1px solid silver;
   display: inline-block;
   width: 100%;
+  padding: 5px;
 }
 
 span[class^="line"]:nth-child(even) {
-  background: rgb(254, 244, 244);
+  background: rgba(255, 255, 255, 0.85);
 }
 
 .highlight {
@@ -27,7 +28,7 @@ span[class^="line"]:nth-child(even) {
 }
 
 .dvSentence {
-  font-size: 18pt;
+  font-size: 14pt;
   font-family: 'Nanum Gothic', serif;
   color: slategrey;
   line-height: 220%;

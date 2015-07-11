@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
   currentlySelectedWord = "";
 
   $('body').on('click', 'span[class^="word"]', function(e) {
@@ -43,15 +44,13 @@ $(document).ready(function() {
   $('body').on('click', '.submit_definition_button', function(e) {
     var defn = $("#submit_definition_box").val();
 
-    if ( $(currentlySelectedWord).tooltipster() ) {
+    if ($(currentlySelectedWord).tooltipster()) {
       $(currentlySelectedWord).tooltipster('destroy');
     }
 
     $(currentlySelectedWord).tooltipster({
       content: $('<span>' + defn + '</span>')
     });
-
-
 
     $(currentlySelectedWord).addClass("hasDefinitionNow");
 
@@ -73,24 +72,22 @@ $(document).ready(function() {
   });
 
 
-  //Update the text of the dictionary toggle button
   $('body').on('click', '#open_right_sidebar', function() {
-    console.log("Figuring out what to do with the dictionary toggle button...");
+    updateDictionaryToggleButton();
 
-    if ($('.control-sidebar').hasClass('control-sidebar-open')) {
-      console.log("Looks like it's already open...");
-      $('#open_right_sidebar').html('<i class="fa fa-hand-o-left"> Show Dictionary</i>');
+    if (dictionaryIsCurrentlyOpen()) {
       hideDictionary();
-
-    } else {
-      console.log("Looks like it's closed...");
-      $('#open_right_sidebar').html('<i class="fa fa-hand-o-right"> Hide Dictionary</i>');
+    }
+    else {
       showDictionary("");
     }
   });
+
 });
+//end doc ready
 
 var showDictionary = function(lookupWord) {
+
   $('.control-sidebar').addClass('control-sidebar-open');
   if (lookupWord === "") {
     return;
@@ -104,6 +101,7 @@ var showDictionary = function(lookupWord) {
 
   $(".control-sidebar").html(iframe + "\r\n" + defineInput);
 
+  updateDictionaryToggleButton();
 
 };
 
@@ -112,4 +110,29 @@ var hideDictionary = function() {
   console.log("hiding dictionary!");
   $('.control-sidebar').removeClass('control-sidebar-open');
 
+  updateDictionaryToggleButton();
+};
+
+var dictionaryIsCurrentlyOpen = function(){
+  if ($('.control-sidebar').hasClass('control-sidebar-open')) {
+    return true;
+  }
+  else {
+    return false;
+  }
+};
+
+//Update the text of the dictionary toggle button
+var updateDictionaryToggleButton = function() {
+
+  console.log("Figuring out what to do with the dictionary toggle button...");
+
+  if (dictionaryIsCurrentlyOpen) {
+    console.log("Looks like it's already open...");
+    $('#open_right_sidebar').html('<i class="fa fa-hand-o-right"> Hide Dictionary</i>');
+
+  } else {
+    console.log("Looks like it's closed...");
+    $('#open_right_sidebar').html('<i class="fa fa-hand-o-left"> Show Dictionary</i>');
+  }
 };

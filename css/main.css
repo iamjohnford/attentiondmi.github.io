@@ -1,66 +1,4 @@
-/*** RESET ***/
 
-
-/* @group Reset */
-
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-}
-
-
-/* HTML5 display-role reset for older browsers */
-
-article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
-  display: block;
-}
-
-body {
-  line-height: 1;
-}
-
-ol, ul {
-  list-style: none;
-}
-
-blockquote, q {
-  quotes: none;
-}
-
-blockquote:before, blockquote:after, q:before, q:after {
-  content: '';
-  content: none;
-}
-
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-
-/* @end */
-
-
-/** ------------------------------------------------------------------- **/
-
-body, html {
-  height: 100%;
-  margin: 0px auto;
-  padding: 0px auto;
-}
-
-#wrapper {
-  height: auto;
-  /* These two lines were the key. */
-  min-height: 100%;
-  position: relative;
-  margin: 0px auto;
-  padding: 0px auto;
-}
 
 span[class^="word"] {
   cursor: pointer;
@@ -89,7 +27,7 @@ span[class^="line"]:nth-child(even) {
 }
 
 div#dv_transcript_korean {
-  max-width: 70%;
+
 }
 
 .dvSentence {
@@ -143,28 +81,14 @@ div#dv_transcript_korean {
   padding: 20px
 }
 
-textarea .transcript {
-  width: 600px !important;
-}
-
 .title {
   background: rgb(61, 65, 77);
   top: 0;
-  font-family: arial, sans-serif;
+  font-family: 'Nanum Gothic', serif;
   font-size: 2em;
   color: white;
   text-align: center;
   padding: 20px;
-}
-
-#content {
-
-  padding-bottom: 100px;
-  max-width: 60%;
-  border:5px solid green;
-  position:fixed;
-  left:20%;
-  top:20%;
 }
 
 .the_media_player_div {
@@ -173,22 +97,6 @@ textarea .transcript {
 
 #controls {
   display: none;
-}
-
-#footer {
-  text-align: center;
-  /*display:none;*/
-  width: 100%;
-  padding: 20px;
-  position: fixed;
-  bottom: 0;
-  background: rgb(61, 65, 77);
-  color: white;
-  font-family: arial, sans-serif;
-}
-
-.copyright {
-  margin-top: 20px;
 }
 
 .player_control {
@@ -223,29 +131,10 @@ textarea .transcript {
   display: inline-block;
 }
 
-textarea {
-  font-size:1.4em;
-  font-family: "Arial", sans-serif;
+.main-sidebar {
+    height:100%;
 }
 
-/*** SIDEBAR ***/
-
-#sidebar {
-  width:20%;
-  height:100%;
-  background: rgb(61, 65, 77);
-  color:white;
-  font-family: "Arial", sans-serif;
-  font-size: 1em;
-  display:inline-block;
-}
-
-.sidebar_title{
-  margin-bottom: 20px;
-  text-transform: uppercase;
-}
-
-.sidebar_item {
-  cursor:pointer;
-  line-height: 2em;
+.sidebar-menu{
+  padding-bottom:20px;
 }

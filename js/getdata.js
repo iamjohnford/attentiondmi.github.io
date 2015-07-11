@@ -9,10 +9,10 @@ $(document).ready(function() {
         $(data).each(function() {
           var title = this.title;
           var content = this.content;
-          output = output +  "<li class='sidebar_item' content='" + content + "'>"+ title + "</li>";
+          output = output +  "<li class='sidebar_item' content='" + content + "'><a href='#'><i class='fa fa-link'></i> <span>"+ title + "</span></a></li>";
         });
 
-        $("#sidebar").html("<ul class='sidebar_menu'><h3 class='sidebar_title'>Choose an Episode</h3>" + output + "</ul>");
+        $(".sidebar-menu").html("<li class='header'>CHOOSE AN EPISODE</li>" + output);
     });
 
     // $("#sidebar").html("hello!");

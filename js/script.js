@@ -20,9 +20,7 @@ $(document).ready(function() {
     showDictionary(wordToLookup);
   });
 
-  $('#sidebar').on('click', '.sidebar_item', function(e) {
-
-    alert("now!");
+  $('body').on('click', '.sidebar_item', function(e) {
 
     var transcript = $(this).attr("content");
     var value = transcript.replace(/\n/g, '<br />');
@@ -77,6 +75,18 @@ $(document).ready(function() {
     $("#submit_definition_box").val("");
   });
 
+  $("#filter").keyup(function(e) {
+    var query = $('#filter').val();
+
+    // var value = $(element).val().toLowerCase();
+        var $li = $(" li");
+
+        $li.hide();
+        $li.filter(function() {
+            return $(this).text().toLowerCase().indexOf(query) > -1;
+        }).show();
+
+  });
 });
 
 var showDictionary = function(lookupWord) {

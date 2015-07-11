@@ -20,9 +20,12 @@ videojs("the_media", {}, function() {
 
 loadMediaPlayer = function() {
   dvPlayer.src({
-    "type": "audio/mp3",
+    // "type": "audio/mp3",
     //"src": "http://traffic.libsyn.com/talktomeinkorean/ttmik-iyagi-72.mp3"
-    "src": "http://traffic.libsyn.com/talktomeinkorean/ttmik-iyagi-18.mp3"
+    // "src": "http://traffic.libsyn.com/talktomeinkorean/ttmik-iyagi-18.mp3",
+    // "techOrder":["youtube", "html5"],
+    // "src":"https://www.youtube.com/watch?v=5MgBikgcWnY"
+    "src": "http://traffic.libsyn.com/talktomeinkorean/ttmik-iyagi-19.mp3",
   });
   dvPlayer.play();
 };

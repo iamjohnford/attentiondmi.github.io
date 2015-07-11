@@ -20,12 +20,30 @@ $(document).ready(function() {
     showDictionary(wordToLookup);
   });
 
+  $('#sidebar').on('click', '.sidebar_item', function(e) {
+
+    alert("now!");
+
+    var transcript = $(this).attr("content");
+    var value = transcript.replace(/\n/g, '<br />');
+
+    $("#dv_transcript_korean").html("<span class='dvSentence' language='ko'>" + value + "</span>");
+
+    loadMediaPlayer();
+
+    $("#controls").show();
+
+    $(".dvSentence").lettering('lines').children('span').lettering('words');
+
+    e.preventDefault();
+  });
+
 
   $("#dv_definitions_close_button").click(function(e) {
     hideDictionary();
 
     if (playerWasPlayingAndIsNowTemporarilyPaused) {
-      playPauseAudio();
+      playPauseAudio(); //Which, since it was paused, will now just play for sure
       playerWasPlayingAndIsNowTemporarilyPaused = false;
     }
 

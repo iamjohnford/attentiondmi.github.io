@@ -9,58 +9,51 @@
   <link href="css/main.css" rel="stylesheet">
   <link href="http://fonts.googleapis.com/earlyaccess/nanumgothic.css" media="all" rel="stylesheet" type="text/css" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/tooltipster/3.0.5/css/tooltipster.min.css" media="all" rel="stylesheet" type="text/css" />
-<link href="http://vjs.zencdn.net/4.12/video-js.css" rel="stylesheet">
+  <link href="http://vjs.zencdn.net/4.12/video-js.css" rel="stylesheet">
 </head>
 
 <body>
   <div id="wrapper">
     <div class="title">Dima's Korean Reader Study Helper</div>
+    <div id="sidebar"></div>
     <div class="the_media_player_div">
       <video class="video-js vjs-default-skin vjs-big-play-centered" controls id="the_media" preload="auto"></video>
     </div>
+    
     <div id="dv_definitions" style="display:none;">
       <a href='#' id='dv_definitions_close_button'>Hide Dictionary (X)</a>
       <div id="dv_definitions_content">This is where definitions will go</div>
       <div id="dv_definitions_userentry">
-        <input type="text" id = "submit_definition_box" class="submit_definition_box" placeholder="Type your own definition here"></input>
+        <input type="text" id="submit_definition_box" class="submit_definition_box" placeholder="Type your own definition here"></input>
         <input type="submit" class="submit_definition_button"></input>
       </div>
     </div>
     <div id="content">
+      Welcome to the Korean Reader!
       <div id="dv_transcript_korean">
-        <div id="dv_transcript_korean">
-          <textarea class="transcript" cols="90" placeholder="Please paste here the transcript for the content you're studying now" rows="30"></textarea>
-          <br/>
-          <input id="btnSubmit" type="submit" />
-        </div>
       </div>
     </div>
     <div id="footer">
 
-    <div id="controls">
-      <a href="#" class="player_control" id="control_back30">Back 30 seconds</a>
-      <a href="#" class="player_control" id="control_back10">Back 10 seconds</a>
-      <a href="#" class="player_control" id="control_playpause">Play/Pause</a>
-      <a href="#" class="player_control" id="control_forward10">Forward 10 seconds</a>
-      <a href="#" class="player_control" id="control_forward30">Forward 30 seconds</a>
-      <span id="percent_done"></span>
+      <div id="controls">
+        <a href="#" class="player_control" id="control_back30">Back 30 seconds</a>
+        <a href="#" class="player_control" id="control_back10">Back 10 seconds</a>
+        <a href="#" class="player_control" id="control_playpause">Play/Pause</a>
+        <a href="#" class="player_control" id="control_forward10">Forward 10 seconds</a>
+        <a href="#" class="player_control" id="control_forward30">Forward 30 seconds</a>
+        <span id="percent_done"></span>
+      </div>
+
+      <div class="copyright">Created by Dima Volo for fellow learners of Korean</div>
     </div>
-
-    <div class="copyright">Created by Dima Volo for fellow learners of Korean</div>
   </div>
-  </div>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  <!--<script type="text/javascript" src="js/jquery.highlight.js"></script>-->
-  <!--http://bartaz.github.io/sandbox.js/jquery.highlight.html-->
-  <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script> -->
-  <!--<script type="text/javascript" src="http://cdn.clappr.io/latest/clappr.min.js"></script>-->
-
-  <script src="http://vjs.zencdn.net/4.12/video.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>  <script src="http://vjs.zencdn.net/4.12/video.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lettering.js/0.7.0/jquery.lettering.min.js"></script>
   <script type="text/javascript" src="js/script.js"></script>
+  <script type="text/javascript" src="js/getdata.js"></script>
   <script type="text/javascript" src="js/mediaplayer.js"></script>
   <script type="text/javascript" src="js/jquery.hotkeys.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tooltipster/3.0.5/js/jquery.tooltipster.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tooltipster/3.0.5/js/jquery.tooltipster.min.js"></script>
 </body>
 
 </html>

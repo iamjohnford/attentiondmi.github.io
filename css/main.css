@@ -66,6 +66,10 @@ span[class^="word"] {
   cursor: pointer;
 }
 
+span[class^="word"]:hover {
+  background: yellow;
+}
+
 span[class^="line"] {
   border-bottom: 1px solid silver;
   display: inline-block;
@@ -154,8 +158,13 @@ textarea .transcript {
 }
 
 #content {
-  padding: 40px;
+
   padding-bottom: 100px;
+  max-width: 60%;
+  border:5px solid green;
+  position:fixed;
+  left:20%;
+  top:20%;
 }
 
 .the_media_player_div {
@@ -212,4 +221,31 @@ textarea .transcript {
 
 .submit_definition_button {
   display: inline-block;
+}
+
+textarea {
+  font-size:1.4em;
+  font-family: "Arial", sans-serif;
+}
+
+/*** SIDEBAR ***/
+
+#sidebar {
+  width:20%;
+  height:100%;
+  background: rgb(61, 65, 77);
+  color:white;
+  font-family: "Arial", sans-serif;
+  font-size: 1em;
+  display:inline-block;
+}
+
+.sidebar_title{
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.sidebar_item {
+  cursor:pointer;
+  line-height: 2em;
 }

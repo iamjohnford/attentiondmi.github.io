@@ -1,54 +1,239 @@
-<!doctype html>
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html>
 
 <head>
-  <meta charset="utf-8">
-  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
-  <title>KoreanReader.com</title>
-  <meta content="" name="description">
-  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta charset="UTF-8">
+  <title>EKO Korean - Study Korean by Listening, Reading, and Looking Up in a Korean Dictionary</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.4 -->
+  <link href="bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <!-- Font Awesome Icons -->
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+  <!-- Font Awesome Animation -->
+  <link href="bootstrap/font-awesome-animation.min.css" rel="stylesheet" type="text/css" />
+  <!-- Ionicons -->
+  <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+  <!-- Theme style -->
+  <link href="bootstrap/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+  <!-- AdminLTE Skins -->
+  <link href="bootstrap/skin-blue.min.css" rel="stylesheet" type="text/css" />
+
+
   <link href="css/main.css" rel="stylesheet">
   <link href="http://fonts.googleapis.com/earlyaccess/nanumgothic.css" media="all" rel="stylesheet" type="text/css" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/tooltipster/3.0.5/css/tooltipster.min.css" media="all" rel="stylesheet" type="text/css" />
-  <link href="http://vjs.zencdn.net/4.12/video-js.css" rel="stylesheet">
+  <link href="http://vjs.zencdn.net/4.12/video-js.css" rel="stylesheet" type="text/css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.nanoscroller/0.8.7/css/nanoscroller.min.css" rel="stylesheet" type="text/css">
+
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
+<!--
+  BODY TAG OPTIONS:
+  =================
+  Apply one or more of the following classes to get the
+  desired effect
+  |---------------------------------------------------------|
+  | SKINS         | skin-blue                               |
+  |               | skin-black                              |
+  |               | skin-purple                             |
+  |               | skin-yellow                             |
+  |               | skin-red                                |
+  |               | skin-green                              |
+  |---------------------------------------------------------|
+  |LAYOUT OPTIONS | fixed                                   |
+  |               | layout-boxed                            |
+  |               | layout-top-nav                          |
+  |               | sidebar-collapse                        |
+  |               | sidebar-mini                            |
+  |---------------------------------------------------------|
+  -->
 
-<body>
-  <div id="wrapper">
-    <div class="title">Dima's Korean Reader Study Helper</div>
-    <div id="sidebar"></div>
-    <div class="the_media_player_div">
-      <video class="video-js vjs-default-skin vjs-big-play-centered" controls id="the_media" preload="auto"></video>
+<body class="skin-blue sidebar-mini">
+  <div class="wrapper">
+
+    <!-- Main Header -->
+    <header class="main-header">
+
+      <!-- Logo -->
+      <a href="/" class="logo">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini"><b>E</b>KO</span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg"><b>EKO</b>Korean</span>
+      </a>
+
+      <!-- Header Navbar -->
+      <nav class="navbar navbar-fixed-top" role="navigation">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+          <span class="sr-only">Toggle navigation</span>
+        </a>
+
+        <!-- Navbar Right Menu -->
+        <div class="navbar-custom-menu">
+          <ul id="controls" class="nav navbar-nav">
+
+            <li><a title="Hint: pressing [CTRL + 3] on your keyboard is the same as clicking this button" href="#" class="player_control" id="control_back30"><i class="fa fa-fast-backward faa-passing animated-hover"></i> 30 seconds</a></li>
+            <li><a href="#" title="Hint: pressing [CTRL + 1] on your keyboard is the same as clicking this button" class="player_control" id="control_back10"><i class="fa fa-backward"></i> 10 seconds</a></li>
+            <li><a href="#" title="Hint: pressing [spacebar] on your keyboard is the same as clicking this button" class="player_control" id="control_playpause"><i id="play_pause_button" class="fa fa-pause faa-pulse animated"></i> Pause</a></li>
+            <li><a href="#" title="Hint: pressing [CTRL + SHIFT + 1] on your keyboard is the same as clicking this button" class="player_control" id="control_forward10">10 seconds <i class="fa fa-forward"></i></a></li>
+            <li><a href="#" title="Hint: pressing [CTRL + SHIFT + 3] on your keyboard is the same as clicking this button" class="player_control" id="control_forward30">30 seconds <i class="fa fa-fast-forward"></i></a></li>
+
+
+            <!-- Control Sidebar Toggle Button -->
+            <li class="percent_indicator">
+              <a class="dv_a_no_hover"><i class="fa fa-flag-checkered fa-border" id="percent_done"> 0% Listened</i></a>
+            </li>
+
+            <!-- Control Sidebar Toggle Button -->
+            <li>
+              <a id="open_right_sidebar" href="#" style="display:none;"><i class="fa fa-hand-o-right"> Hide Dictionary</i></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+
+      <!-- sidebar: style can be found in sidebar.less -->
+      <section class="sidebar nano">
+
+        <div class="nano-content">
+          <!-- search form (Optional) -->
+          <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+              <input type="text" name="q" id="filter" class="form-control" placeholder="Search..." />
+              <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+              </span>
+            </div>
+          </form>
+          <!-- /.search form -->
+
+          <!-- Sidebar Menu -->
+          <ul class="sidebar-menu">
+
+          </ul>
+          <!-- /.sidebar-menu -->
+        </div>
+      </section>
+      <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1>
+          Improve Your Korean Comprehension
+          <small>by listening to media, following along, and looking up unknown words</small>
+        </h1>
+        <!-- <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+            <li class="active">Here</li>
+          </ol> -->
+      </section>
+
+      <!-- Main content -->
+      <section class="content">
+
+        <!-- Your Page Content Here -->
+        <div class="dvIntroduction">
+          I made this tool to help me (and you) get better at Korean.
+          <br /> You can get started by selecting an episode from the menu on the left.
+          <br />
+          <h2>Instructions</h2>
+          <ol>
+            <li>Select an episode from the menu on the left</li>
+            <li>You'll see the transcript in Korean, and the audio will start playing automatically</li>
+            <li>Use the controls at the top of the page to skip around in the audio. You can also use keyboard shortcuts. Hover over a control for a moment with your mouse to find out the keyboard shortcut for it.</li>
+            <li>While listening, there will be words you don't know yet. Press or click on a word to highlight it in yellow, but keep listening.</li>
+            <li>After listening, you'll want to define the words you didn't know. Click on any highlighted word again to bring up the Korean dictionary.</li>
+            <li>You can write out a definition for any word in the box at the bottom of the dictionary pane</li>
+            <li>Now when you mouse over a word you'll see a tip with your definition</li>
+          </ol>
+          <br /> HAPPY STUDYING!
+          <br />
+          <br /> -- Dima in Busan
+        </div>
+
+
+        <div id="dv_transcript_korean">
+        </div>
+
+        <div class="the_media_player_div">
+          <video class="video-js vjs-default-skin vjs-big-play-centered" controls id="the_media" preload="auto"></video>
+        </div>
+
+        <div id="dv_definitions" style="display:none;">
+          <div id="dv_definitions_content">Highlight any word, then click on that highlighted word to see the dictionary definition for it.</div>
+
+        </div>
+
+
+
+      </section>
+      <!-- /.content -->
     </div>
+    <!-- /.content-wrapper -->
 
-    <div id="dv_definitions" style="display:none;">
-      <a href='#' id='dv_definitions_close_button'>Hide Dictionary (X)</a>
-      <div id="dv_definitions_content">This is where definitions will go</div>
-      <div id="dv_definitions_userentry">
-        <input type="text" id="submit_definition_box" class="submit_definition_box" placeholder="Type your own definition here"></input>
-        <input type="submit" class="submit_definition_button"></input>
+    <!-- Main Footer -->
+    <footer class="main-footer">
+      <!-- To the right -->
+      <div class="pull-right hidden-xs">
+        Made with <i class="fa fa-heart"></i> in Busan by a Web Developer named Dima
       </div>
-    </div>
-    <div id="content">
-      Welcome to the Korean Reader!
-      <div id="dv_transcript_korean">
-      </div>
-    </div>
-    <div id="footer">
+      <!-- Default to the left -->
+      <strong>Copyright &copy; 2015 <a href="http://WebDeveloperInKorea.com">WebDeveloperInKorea.com</a>.</strong> All rights reserved.
+    </footer>
 
-      <div id="controls">
-        <a href="#" class="player_control" id="control_back30">Back 30 seconds</a>
-        <a href="#" class="player_control" id="control_back10">Back 10 seconds</a>
-        <a href="#" class="player_control" id="control_playpause">Play/Pause</a>
-        <a href="#" class="player_control" id="control_forward10">Forward 10 seconds</a>
-        <a href="#" class="player_control" id="control_forward30">Forward 30 seconds</a>
-        <span id="percent_done"></span>
-      </div>
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
 
-      <div class="copyright">Created by Dima Volo for fellow learners of Korean</div>
-    </div>
+      <ul class="control-sidebar-menu">
+        <li class="dv_definitions_content">This is where definitions will go</li>
+        <li class="dv_definitions_userentry">
+          <input type="text" id="submit_definition_box" class="submit_definition_box" placeholder="Type your own definition here"></input>
+          <input type="submit" class="submit_definition_button"></input>
+        </li>
+      </ul>
+
+
+
+      <!-- Add the sidebar's background. This div must be placed
+           immediately after the control sidebar -->
+      <div class="control-sidebar-bg"></div>
   </div>
+  <!-- ./wrapper -->
+
+  <!-- REQUIRED JS SCRIPTS -->
+
+  <!-- jQuery 2.1.4 -->
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  <script src="http://vjs.zencdn.net/4.12/video.js"></script>
+  <!-- Bootstrap 3.3.2 JS -->
+  <script src="bootstrap/bootstrap.min.js" type="text/javascript"></script>
+  <!-- SlimScroll -->
+  <!-- <script src="bootstrap/jquery.slimscroll.min.js" type="text/javascript"></script> -->
+  <!-- AdminLTE App -->
+  <script src="bootstrap/app.min.js" type="text/javascript"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nanoscroller/0.8.7/javascripts/jquery.nanoscroller.min.js" type="text/javascript"></script>
+
+
+  <script type="text/javascript" src="http://vjs.zencdn.net/4.12/video.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lettering.js/0.7.0/jquery.lettering.min.js"></script>
   <script type="text/javascript" src="js/script.js"></script>
   <script type="text/javascript" src="js/getdata.js"></script>

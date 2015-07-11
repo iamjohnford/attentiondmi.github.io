@@ -18,6 +18,7 @@ $(document).ready(function() {
     }
 
     showDictionary(wordToLookup);
+
   });
 
   $('body').on('click', '.sidebar_item', function(e) {
@@ -39,37 +40,18 @@ $(document).ready(function() {
   });
 
 
-  $("#dv_definitions_close_button").click(function(e) {
-    hideDictionary();
-
-    if (playerWasPlayingAndIsNowTemporarilyPaused) {
-      playPauseAudio(); //Which, since it was paused, will now just play for sure
-      playerWasPlayingAndIsNowTemporarilyPaused = false;
-    }
-
-    e.preventDefault();
-  });
-
-  $("#btnSubmit").click(function(e) {
-    var transcript = $(".transcript").val();
-    var value = transcript.replace(/\n/g, '<br />');
-
-    $("#dv_transcript_korean").html("<span class='dvSentence' language='ko'>" + value + "</span>");
-    loadMediaPlayer();
-
-    $("#controls").show();
-
-    $(".dvSentence").lettering('lines').children('span').lettering('words');
-
-    e.preventDefault();
-  });
-
-  $(".submit_definition_button").click(function(e) {
+  $('body').on('click', '.submit_definition_button', function(e) {
     var defn = $("#submit_definition_box").val();
+
+    if ( $(currentlySelectedWord).tooltipster() ) {
+      $(currentlySelectedWord).tooltipster('destroy');
+    }
 
     $(currentlySelectedWord).tooltipster({
       content: $('<span>' + defn + '</span>')
     });
+
+
 
     $(currentlySelectedWord).addClass("hasDefinitionNow");
 
@@ -89,17 +71,45 @@ $(document).ready(function() {
     }).show();
 
   });
+
+
+  //Update the text of the dictionary toggle button
+  $('body').on('click', '#open_right_sidebar', function() {
+    console.log("Figuring out what to do with the dictionary toggle button...");
+
+    if ($('.control-sidebar').hasClass('control-sidebar-open')) {
+      console.log("Looks like it's already open...");
+      $('#open_right_sidebar').html('<i class="fa fa-hand-o-left"> Show Dictionary</i>');
+      hideDictionary();
+
+    } else {
+      console.log("Looks like it's closed...");
+      $('#open_right_sidebar').html('<i class="fa fa-hand-o-right"> Hide Dictionary</i>');
+      showDictionary("");
+    }
+  });
 });
 
 var showDictionary = function(lookupWord) {
-  // $("#dv_definitions").show();
+  $('.control-sidebar').addClass('control-sidebar-open');
+  if (lookupWord === "") {
+    return;
+  }
   var definitionURL = "http://dic.daum.net/search.do?q=" + lookupWord + "&dic=ee";
-  // $("#dv_definitions_content").html("<iframe target='_top' width='100%' height='100%' src=" + definitionURL + "></iframe>");
+  $('#open_right_sidebar').show();
   $(".control-sidebar").html("<h1>Loading Dictionary...</h1>");
-  $(".control-sidebar").html("<iframe target='_top' width='100%' height='100%' src=" + definitionURL + "></iframe>");
-  $("#open_right_sidebar").click();
+
+  var iframe = "<iframe target='_top' width='100%' height='100%' src=" + definitionURL + "></iframe>";
+  var defineInput = '<div id="dv_definitions_userentry"><input type="text" id="submit_definition_box" class="submit_definition_box" placeholder="Type your own definition here"></input> <input type="submit" class="submit_definition_button" value="Define This"></input></div>';
+
+  $(".control-sidebar").html(iframe + "\r\n" + defineInput);
+
+
 };
 
 var hideDictionary = function() {
-  $("#dv_definitions").hide();
+
+  console.log("hiding dictionary!");
+  $('.control-sidebar').removeClass('control-sidebar-open');
+
 };

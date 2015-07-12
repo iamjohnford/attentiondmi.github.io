@@ -41,6 +41,7 @@ $(document).ready(function() {
 
     hideLeftSideBar();
     $('.content').scrollTop();
+    highlightPreviouslyDefinedWordsInTranscript();
     e.preventDefault();
   });
 
@@ -49,17 +50,9 @@ $(document).ready(function() {
     var defn = $("#submit_definition_box").val();
     var wordToDefine = $(currentlySelectedWord).text().trim();
 
-    $("span[class^='word']:textEquals(" + wordToDefine + ")").each(function() {
-      if ($(this).tooltipster()) {
-        $(this).tooltipster('destroy');
-      }
+    addDefinitionToGlobalList(wordToDefine, defn);
 
-      $(this).tooltipster({
-        content: $('<span>' + defn + '</span>')
-      });
-
-      $(this).addClass("hasDefinitionNow");
-    });
+    highlightPreviouslyDefinedWordsInTranscript(wordToDefine);
 
     hideDictionary();
     $("#submit_definition_box").val("");
@@ -87,16 +80,16 @@ $(document).ready(function() {
     }
   });
 
-//Extend jquery with plugin
-$.expr[':'].textEquals = $.expr.createPseudo(function(arg) {
-    return function( elem ) {
-        return $(elem).text().match("^" + arg + "$");
+  //Extend jquery with plugin
+  $.expr[':'].textEquals = $.expr.createPseudo(function(arg) {
+    return function(elem) {
+      return $(elem).text().match("^" + arg + "$");
     };
-});
+  });
 
   //Update sidebar positions depending on scroll position
 
-//Extend jquery with plugin
+  //Extend jquery with plugin
   $.fn.visibleHeight = function() {
     var elBottom, elTop, scrollBot, scrollTop, visibleBottom, visibleTop;
     scrollTop = $(window).scrollTop();

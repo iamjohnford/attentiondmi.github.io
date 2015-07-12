@@ -11,14 +11,15 @@ $(document).ready(function() {
   $('body').on('click', '.highlight', function() {
     currentlySelectedWord = this;
 
-    var wordToLookup = this.innerHTML;
-    wordToLookup = wordToLookup.replace(/(?:[\(\)\-&$#!?\[\]{}\"\',\.]+(?:\s|$)|(?:^|\s)[\(\)\-&$#!?\[\]{}\"\',\.]+)/g, ' ').trim();
+    var wordToLookup = this.innerText;
+    wordToLookup = wordToLookup.replace(/[,.\s]+/g, '').trim();
 
     if (!dvPlayer.paused()) {
       pauseAudio();
       playerWasPlayingAndIsNowTemporarilyPaused = true;
     }
 
+    console.log("About to show the dictionary with a lookup for: " + wordToLookup);
     showDictionary(wordToLookup);
 
 

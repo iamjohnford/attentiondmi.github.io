@@ -91,7 +91,7 @@ $(document).ready(function() {
   //Extend jquery with plugin
   $.expr[':'].textEquals = $.expr.createPseudo(function(arg) {
     return function(elem) {
-      return $(elem).text().match("^" + arg + "$");
+      return $(elem).text().replace(/[,.\s]+/g, '').match("^" + arg.replace(/[,.\s]+/g, '') + "$");
     };
   });
 

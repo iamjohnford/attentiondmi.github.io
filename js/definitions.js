@@ -6,7 +6,6 @@ $(document).ready(function() {
 highlightPreviouslyDefinedWordsInTranscript = function (onlyThisSpecificWord){
   var previouslyDefinedWords = getDefinitionGlobalList();
 
-
   $(previouslyDefinedWords).each(function() {
     var wordToDefine = this.word;
     var defn = this.meaning;
@@ -98,6 +97,8 @@ addHighlightToGlobalList = function(word) {
     allHighlights = [];
   }
 
+  console.log("The raw word to highlight is: " + word);
+  console.log("After removing punctuation, the word that will be highlighted is: " + word);
   allHighlights.push(word);
 
   localStorage.setObj("highlights", allHighlights);

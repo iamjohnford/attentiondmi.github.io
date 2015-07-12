@@ -10,6 +10,25 @@ body:not(.pace-done) >:not(.pace), body:not(.pace-done):before, body:not(.pace-d
   opacity: 0
 }
 
+/*** Orientation Warning for mobile ***/
+
+/* for all screens */
+#orientationWarning {display: none;}
+
+/* only when orientation is in portrait mode */
+@media all and (orientation:portrait) {
+    #orientationWarning {
+         display: block;
+         height:100%;
+         width:100%;
+         position:fixed;
+         background:black;
+         color:white;
+         z-index: 10000;
+         padding:100px;
+         text-align: center;
+    }
+}
 
 /*** Transcript Text Styles ***/
 

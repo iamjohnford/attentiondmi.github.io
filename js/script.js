@@ -24,13 +24,15 @@ $(document).ready(function() {
 
   $('body').on('click', '.sidebar_item', function(e) {
 
-    var transcript = $(this).attr("content");
+    var title = $(this).attr("media_title");
+    var transcript = $(this).attr("media_content");
     var media_url = $(this).attr("media_url");
     var value = transcript.replace(/\n/g, '<br />');
 
     $(".dvIntroduction").hide();
     $("#dv_transcript_korean").html("<span class='dvSentence' language='ko'>" + value + "</span>");
 
+    $('.content-header').html("<h1>" + title + "</h1>");
     loadMediaPlayer(media_url);
 
     console.log("About to show controls...");
@@ -38,6 +40,8 @@ $(document).ready(function() {
 
     $(".dvSentence").lettering('lines').children('span').lettering('words');
 
+    hideLeftSideBar();
+    $('.content').scrollTop();
     e.preventDefault();
   });
 
@@ -74,14 +78,36 @@ $(document).ready(function() {
 
 
   $('body').on('click', '#open_right_sidebar', function() {
-    updateDictionaryToggleButton();
-
-    if (dictionaryIsCurrentlyOpen()) {
+    if (this.innerText.indexOf("Hide") > 0) {
       hideDictionary();
+    } else {
+      showDictionary();
     }
-    else {
-      showDictionary("");
+  });
+
+
+  //Update sidebar positions depending on scroll position
+
+  $.fn.visibleHeight = function() {
+    var elBottom, elTop, scrollBot, scrollTop, visibleBottom, visibleTop;
+    scrollTop = $(window).scrollTop();
+    scrollBot = scrollTop + $(window).height();
+    elTop = this.offset().top;
+    elBottom = elTop + this.outerHeight();
+    visibleTop = elTop < scrollTop ? scrollTop : elTop;
+    visibleBottom = elBottom > scrollBot ? scrollBot : elBottom;
+    return visibleBottom - visibleTop;
+  };
+
+  $(window).scroll(function() {
+    var visHeight = $('.navbar').visibleHeight();
+
+    if (visHeight < 1) {
+      visHeight = 0;
     }
+    $('.control-sidebar').css("padding-top", visHeight);
+
+    console.log("Visible height of navbar is " + visHeight);
   });
 
 });
@@ -90,7 +116,7 @@ $(document).ready(function() {
 var showDictionary = function(lookupWord) {
 
   $('.control-sidebar').addClass('control-sidebar-open');
-  if (lookupWord === "") {
+  if (lookupWord === "" || lookupWord === undefined) {
     return;
   }
   var definitionURL = "http://dic.daum.net/search.do?q=" + lookupWord + "&dic=ee";
@@ -102,38 +128,33 @@ var showDictionary = function(lookupWord) {
 
   $(".control-sidebar").html(iframe + "\r\n" + defineInput);
 
-  updateDictionaryToggleButton();
+  $('#open_right_sidebar').html('<i class="fa fa-hand-o-right"> Hide Dictionary</i>');
+  makeNavMenuFixed();
 
 };
 
 var hideDictionary = function() {
 
-  console.log("hiding dictionary!");
   $('.control-sidebar').removeClass('control-sidebar-open');
-
-  updateDictionaryToggleButton();
+  $('#open_right_sidebar').html('<i class="fa fa-hand-o-left"> Show Dictionary</i>');
+  makeNavMenuStatic();
 };
 
-var dictionaryIsCurrentlyOpen = function(){
-  if ($('.control-sidebar').hasClass('control-sidebar-open')) {
-    return true;
-  }
-  else {
-    return false;
-  }
+var hideLeftSideBar = function() {
+  $('body').removeClass('sidebar-collapse');
+  $('body').addClass('sidebar-collapse');
 };
 
-//Update the text of the dictionary toggle button
-var updateDictionaryToggleButton = function() {
+var makeNavMenuFixed = function() {
+  $('.navbar').removeClass('navbar-static-top');
+  $('.navbar').removeClass('navbar-fixed-top');
+  $('.navbar').addClass('navbar-fixed-top');
+  $('.content-header').css("margin-top", "50px");
+};
 
-  console.log("Figuring out what to do with the dictionary toggle button...");
-
-  if (dictionaryIsCurrentlyOpen) {
-    console.log("Looks like it's already open...");
-    $('#open_right_sidebar').html('<i class="fa fa-hand-o-right"> Hide Dictionary</i>');
-
-  } else {
-    console.log("Looks like it's closed...");
-    $('#open_right_sidebar').html('<i class="fa fa-hand-o-left"> Show Dictionary</i>');
-  }
+var makeNavMenuStatic = function() {
+  $('.navbar').removeClass('navbar-fixed-top');
+  $('.navbar').removeClass('navbar-static-top');
+  $('.navbar').addClass('navbar-static-top');
+  $('.content-header').css("margin-top", "0px");
 };

@@ -25,7 +25,7 @@ loadMediaPlayer = function(media_url) {
     "type": "audio/mp3",
     "src": media_url,
   });
-  dvPlayer.play();
+  playPauseAudio();
 };
 
 playPauseAudio = function() {
@@ -33,15 +33,17 @@ playPauseAudio = function() {
     skipNumSeconds(-2);
     dvPlayer.play();
     $('#control_playpause').html('<i id="play_pause_button" class="fa fa-pause faa-pulse animated"></i> Pause');
+    makeNavMenuStatic();
   } else {
     dvPlayer.pause();
-
+    makeNavMenuFixed();
     $('#control_playpause').html('<i id="play_pause_button" class="fa fa-play-circle faa-wrench animated"></i> Play');
   }
 };
 
 pauseAudio = function() {
   dvPlayer.pause();
+  makeNavMenuFixed();
 };
 
 

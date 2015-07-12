@@ -19,6 +19,10 @@ span[class^="line"]:nth-child(even) {
   background: rgba(255, 255, 255, 0.85);
 }
 
+span[class^="line"]:hover {
+  background-color: rgb(225, 255, 222);
+}
+
 .highlight {
   background: yellow;
 }

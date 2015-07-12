@@ -72,11 +72,13 @@ $(document).ready(function() {
   });
 
 
-  $('body').on('click', '#open_right_sidebar', function() {
+  $('body').on('click', '#open_right_sidebar', function(e) {
     if (this.innerText.indexOf("Hide") > 0) {
       hideDictionary();
+      e.preventDefault();
     } else {
       showDictionary();
+      e.preventDefault();
     }
   });
 
@@ -134,9 +136,12 @@ var showDictionary = function(lookupWord) {
   //The following has to go here because the submit_definition_box element was just dynamically created
   //And it gets dynamically recreated. As a result, we have to re-bind the below event to it at
   //each time of dynamic creation. I'm sure there's a better way, but this works
-  $("input#submit_definition_box").on('keyup', null, 'return', function() {
-    console.log("Using the definition you typed and pressing ENTER");
-    $(".submit_definition_button").click();
+
+  $("input#submit_definition_box").keypress(function(e) {
+    if (e.which == 13) {
+      // console.log("Using the definition you typed and pressing ENTER");
+      $(".submit_definition_button").click();
+    }
   });
 
 };

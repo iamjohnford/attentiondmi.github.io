@@ -25,12 +25,13 @@ $(document).ready(function() {
   $('body').on('click', '.sidebar_item', function(e) {
 
     var transcript = $(this).attr("content");
+    var media_url = $(this).attr("media_url");
     var value = transcript.replace(/\n/g, '<br />');
 
     $(".dvIntroduction").hide();
     $("#dv_transcript_korean").html("<span class='dvSentence' language='ko'>" + value + "</span>");
 
-    loadMediaPlayer();
+    loadMediaPlayer(media_url);
 
     console.log("About to show controls...");
     $("#controls").show();

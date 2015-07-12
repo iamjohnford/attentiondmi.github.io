@@ -45,7 +45,7 @@ span[class^="line"]:hover {
 
 .dvSentence {
   font-size: 14pt;
-  font-family: 'Nanum Gothic', serif;
+  font-family: 'Nanum Gothic', sans-serif;
   color: slategrey;
   line-height: 220%;
   text-transform: none;

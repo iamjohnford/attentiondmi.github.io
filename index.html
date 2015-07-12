@@ -25,7 +25,7 @@
 
 
   <link href="css/main.css" rel="stylesheet">
-  <link href="http://fonts.googleapis.com/earlyaccess/nanumgothic.css" media="all" rel="stylesheet" type="text/css" />
+  <!-- <link href="http://fonts.googleapis.com/earlyaccess/nanumgothic.css" media="all" rel="stylesheet" type="text/css" /> -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/tooltipster/3.0.5/css/tooltipster.min.css" media="all" rel="stylesheet" type="text/css" />
   <link href="http://vjs.zencdn.net/4.12/video-js.css" rel="stylesheet" type="text/css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.nanoscroller/0.8.7/css/nanoscroller.min.css" rel="stylesheet" type="text/css">
@@ -241,6 +241,25 @@
   <script type="text/javascript" src="js/mediaplayer.js"></script>
   <script type="text/javascript" src="js/jquery.hotkeys.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tooltipster/3.0.5/js/jquery.tooltipster.min.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+  <script type="text/javascript">
+    WebFontConfig = {
+      custom: {
+          families: ['Nanum Gothic'],
+          urls: ['http://fonts.googleapis.com/earlyaccess/nanumgothic.css']
+      }
+    };
+    (function() {
+      var wf = document.createElement('script');
+      wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+        '://ajax.googleapis.com/ajax/libs/webfont/1.4.10/webfont.js';
+      wf.type = 'text/javascript';
+      wf.async = 'true';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(wf, s);
+    })();
+   </script>
 </body>
 
 </html>

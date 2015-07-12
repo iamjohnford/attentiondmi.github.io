@@ -46,10 +46,11 @@ $(document).ready(function() {
 
     hideLeftSideBar();
     hideDictionary();
-    $('.content').scrollTop();
+    $("html, body").animate({ scrollTop: 0 }, "slow");
     highlightPreviouslyDefinedWordsInTranscript();
     highlightPreviouslyHighlightedWordsInTranscript();
     e.preventDefault();
+
   });
 
 
@@ -163,6 +164,7 @@ var hideDictionary = function() {
 var hideLeftSideBar = function() {
   $('body').removeClass('sidebar-collapse');
   $('body').addClass('sidebar-collapse');
+  $('body').removeClass('sidebar-open');
 };
 
 var makeNavMenuFixed = function() {

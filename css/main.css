@@ -27,6 +27,7 @@ span[class^="line"] {
   display: inline-block;
   width: 100%;
   padding: 5px;
+  padding-right:20px;
 }
 
 span[class^="line"]:nth-child(even) {

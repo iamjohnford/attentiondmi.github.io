@@ -35,7 +35,6 @@ $(document).ready(function() {
     $('.content-header').html("<h1>" + title + "</h1>");
     loadMediaPlayer(media_url);
 
-    console.log("About to show controls...");
     $("#controls").show();
 
     $(".dvSentence").lettering('lines').children('span').lettering('words');
@@ -48,16 +47,19 @@ $(document).ready(function() {
 
   $('body').on('click', '.submit_definition_button', function(e) {
     var defn = $("#submit_definition_box").val();
+    var wordToDefine = $(currentlySelectedWord).text().trim();
 
-    if ($(currentlySelectedWord).tooltipster()) {
-      $(currentlySelectedWord).tooltipster('destroy');
-    }
+    $("span[class^='word']:textEquals(" + wordToDefine + ")").each(function() {
+      if ($(this).tooltipster()) {
+        $(this).tooltipster('destroy');
+      }
 
-    $(currentlySelectedWord).tooltipster({
-      content: $('<span>' + defn + '</span>')
+      $(this).tooltipster({
+        content: $('<span>' + defn + '</span>')
+      });
+
+      $(this).addClass("hasDefinitionNow");
     });
-
-    $(currentlySelectedWord).addClass("hasDefinitionNow");
 
     hideDictionary();
     $("#submit_definition_box").val("");
@@ -85,9 +87,16 @@ $(document).ready(function() {
     }
   });
 
+//Extend jquery with plugin
+$.expr[':'].textEquals = $.expr.createPseudo(function(arg) {
+    return function( elem ) {
+        return $(elem).text().match("^" + arg + "$");
+    };
+});
 
   //Update sidebar positions depending on scroll position
 
+//Extend jquery with plugin
   $.fn.visibleHeight = function() {
     var elBottom, elTop, scrollBot, scrollTop, visibleBottom, visibleTop;
     scrollTop = $(window).scrollTop();
@@ -106,8 +115,6 @@ $(document).ready(function() {
       visHeight = 0;
     }
     $('.control-sidebar').css("padding-top", visHeight);
-
-    console.log("Visible height of navbar is " + visHeight);
   });
 
 });
@@ -130,6 +137,14 @@ var showDictionary = function(lookupWord) {
 
   $('#open_right_sidebar').html('<i class="fa fa-hand-o-right"> Hide Dictionary</i>');
   makeNavMenuFixed();
+
+  //The following has to go here because the submit_definition_box element was just dynamically created
+  //And it gets dynamically recreated. As a result, we have to re-bind the below event to it at
+  //each time of dynamic creation. I'm sure there's a better way, but this works
+  $("input#submit_definition_box").on('keyup', null, 'return', function() {
+    console.log("Using the definition you typed and pressing ENTER");
+    $(".submit_definition_button").click();
+  });
 
 };
 

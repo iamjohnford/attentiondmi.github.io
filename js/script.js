@@ -3,8 +3,9 @@ $(document).ready(function() {
   currentlySelectedWord = "";
 
   $('body').on('click', 'span[class^="word"]', function(e) {
-    var selectedText = this.innerText;
-    $(this).addClass("highlight");
+    var selectedText = $(this).text();
+    addHighlightToGlobalList(selectedText);
+    highlightPreviouslyHighlightedWordsInTranscript();
   });
 
   $('body').on('click', '.highlight', function() {
@@ -19,6 +20,7 @@ $(document).ready(function() {
     }
 
     showDictionary(wordToLookup);
+
 
   });
 
@@ -40,8 +42,10 @@ $(document).ready(function() {
     $(".dvSentence").lettering('lines').children('span').lettering('words');
 
     hideLeftSideBar();
+    hideDictionary();
     $('.content').scrollTop();
     highlightPreviouslyDefinedWordsInTranscript();
+    highlightPreviouslyHighlightedWordsInTranscript();
     e.preventDefault();
   });
 

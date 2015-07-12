@@ -1,14 +1,11 @@
 $(document).ready(function() {
 
-
-
 });
 
+/*** Definitions Entered by User ***/
 highlightPreviouslyDefinedWordsInTranscript = function (onlyThisSpecificWord){
-
-
   var previouslyDefinedWords = getDefinitionGlobalList();
-  tester = previouslyDefinedWords;
+
 
   $(previouslyDefinedWords).each(function() {
     var wordToDefine = this.word;
@@ -70,6 +67,66 @@ getDefinitionGlobalList = function() {
   allDefinitions = localStorage.getObj("defn");
   return allDefinitions;
 };
+
+/*** END Definitions Entered by User ***/
+
+/*** Highlights Entered by User ***/
+highlightPreviouslyHighlightedWordsInTranscript = function (onlyThisSpecificWord){
+  var previouslyHighlightedWords = getHighlightsGlobalList();
+
+  $(previouslyHighlightedWords).each(function() {
+    var wordToHighlight = this;
+
+    if (onlyThisSpecificWord !== undefined && onlyThisSpecificWord.length > 0){
+      if (wordToHighlight !== onlyThisSpecificWord) return true; //i.e. "continue this loop, but skip this iteration"
+    }
+
+    console.log("I want to highlight: " + wordToHighlight);
+
+    $("span[class^='word']:textEquals(" + wordToHighlight + ")").each(function() {
+      $(this).addClass("highlight");
+    });
+
+  });
+};
+
+addHighlightToGlobalList = function(word) {
+
+  allHighlights = localStorage.getObj("highlights");
+
+  if (allHighlights === null) {
+    allHighlights = [];
+  }
+
+  allHighlights.push(word);
+
+  localStorage.setObj("highlights", allHighlights);
+};
+
+removeHighlightFromGlobalList = function(word) {
+  allHighlights = localStorage.getObj("highlights");
+
+  if (allHighlights === null) return;
+
+  var i = allHighlights.length;
+  while (i--) {
+    if (allHighlights[i] === word) {
+      allHighlights.splice(i, 1);
+    }
+  }
+  // delete allHighlights[word];
+
+  localStorage.setObj("highlights", allHighlights);
+};
+
+getHighlightsGlobalList = function() {
+  allHighlights = localStorage.getObj("highlights");
+  return allHighlights;
+};
+
+/*** END Definitions Entered by User ***/
+
+
 
 //Extend local storage to handle objects and arrays
 Storage.prototype.setObj = function(key, obj) {

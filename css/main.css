@@ -21,6 +21,7 @@ span[class^="line"]:nth-child(even) {
 
 span[class^="line"]:hover {
   background-color: rgb(225, 255, 222);
+  color:black;
 }
 
 .highlight {
@@ -40,7 +41,7 @@ span[class^="line"]:hover {
   text-indent: 0ex;
   text-align: left;
   letter-spacing: normal;
-  word-spacing: 1ex;
+  word-spacing: 0.5em;
   text-decoration: none;
 }
 

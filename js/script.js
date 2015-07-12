@@ -34,14 +34,14 @@ $(document).ready(function() {
     $(".dvIntroduction").hide();
     $("#dv_transcript_korean").html("<span class='dvSentence' language='ko'>" + value + "</span>");
 
+    $(".dvSentence").lettering('lines').children('span').lettering('words');
     $('span[class^="word"]').wordBreakKeepAll(); //prevent Korean words from being broken apart
+
 
     $('.content-header').html("<h1>" + title + "</h1>");
     loadMediaPlayer(media_url);
 
     $("#controls").show();
-
-    $(".dvSentence").lettering('lines').children('span').lettering('words');
 
     hideLeftSideBar();
     hideDictionary();

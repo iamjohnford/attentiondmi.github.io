@@ -20,9 +20,8 @@
     }
 }
 
-@media only screen and (min-resolution: 117dpi) and (max-resolution: 119dpi), only screen and (min-resolution: 131dpi) and (max-resolution: 133dpi), only screen and (min-resolution: 145dpi) and (max-resolution: 154dpi), only screen and (min-resolution: 162dpi) and (max-resolution: 164dpi), only screen and (min-resolution: 169dpi) {
-  /* Your touch-specific css goes here */
-
+/* Desktops and laptops ----------- */
+@media only screen and (max-width : 1224px) {
   a.logo, .control_label {
     display: none !important;
   }

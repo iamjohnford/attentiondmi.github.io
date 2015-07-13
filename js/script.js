@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
   currentlySelectedWord = "";
+  currentLanguage = "ko";
 
   $('body').on('click', 'span[class^="word"]', function(e) {
     var selectedText = $(this).text();
@@ -11,21 +12,14 @@ $(document).ready(function() {
   $('body').on('click', '.highlight', function() {
     currentlySelectedWord = this;
 
-
     var wordToLookup = this.innerText;
-    console.log("The word to look up is: " + wordToLookup);
-
-
     wordToLookup = removePunctuation(wordToLookup.trim());
-
-    console.log("After processing, that word to look up is: " + wordToLookup);
 
     if (!dvPlayer.paused()) {
       pauseAudio();
       playerWasPlayingAndIsNowTemporarilyPaused = true;
     }
 
-    console.log("Showing dictionary...");
     showDictionary(wordToLookup);
   });
 
@@ -35,25 +29,16 @@ $(document).ready(function() {
     var transcript = $(this).attr("media_content");
     var media_url = $(this).attr("media_url");
 
-    // transcript = transcript.replace(/\n/g, '<br />');
+    currentLanguage = $(this).attr("language");
 
-
-    console.log("The transcript before: " + transcript);
     //remove blank lines from transcript first
     transcript = transcript.replace(new RegExp('\n?\r?\n', 'g'), '<br />');
-
-    //
-    // transcript = transcript.replace(/\n/g, '<br />');
-    console.log("The transcript is now: " + transcript);
-
 
     $(".dvIntroduction").hide();
     $("#dv_transcript_korean").html("<span class='dvSentence' language='ko'>" + transcript + "</span>");
 
-
     $(".dvSentence").lettering('lines').children('span').lettering('words');
     $('span[class^="word"]').wordBreakKeepAll(); //prevent Korean words from being broken apart
-
 
     $('.content-header').html("<h1>" + title + "</h1>");
     loadMediaPlayer(media_url);
@@ -124,7 +109,7 @@ $(document).ready(function() {
 
   //Update sidebar positions depending on scroll position
 
-  //Extend jquery with plugin
+  //Extend jquery or javascript with plugins and functions
   $.fn.visibleHeight = function() {
     var elBottom, elTop, scrollBot, scrollTop, visibleBottom, visibleTop;
     scrollTop = $(window).scrollTop();
@@ -145,6 +130,21 @@ $(document).ready(function() {
     $('.control-sidebar').css("padding-top", visHeight);
   });
 
+  //return an array with only unique vals
+  uniq_fast = function(arr) {
+    var seen = {};
+    var out = [];
+    var len = arr.length;
+    var j = 0;
+    for (var i = 0; i < len; i++) {
+      var item = arr[i];
+      if (seen[item] !== 1) {
+        seen[item] = 1;
+        out[j++] = item;
+      }
+    }
+    return out;
+  };
 });
 //end doc ready
 
@@ -154,7 +154,13 @@ var showDictionary = function(lookupWord) {
   if (lookupWord === "" || lookupWord === undefined) {
     return;
   }
-  var definitionURL = "http://dic.daum.net/search.do?q=" + lookupWord + "&dic=ee";
+
+  var lang = "ee";
+  if (currentLanguage === "en") {
+    lang = "eng";
+  }
+
+  var definitionURL = "http://dic.daum.net/search.do?q=" + lookupWord + "&dic=" + lang;
   $('#open_right_sidebar').show();
   $(".control-sidebar").html("<h1>Loading Dictionary...</h1>");
 

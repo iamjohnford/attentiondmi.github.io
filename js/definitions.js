@@ -3,16 +3,22 @@ $(document).ready(function() {
 });
 
 /*** Definitions Entered by User ***/
-highlightPreviouslyDefinedWordsInTranscript = function (onlyThisSpecificWord){
+highlightPreviouslyDefinedWordsInTranscript = function(onlyThisSpecificWord) {
   var previouslyDefinedWords = getDefinitionGlobalList();
+
+
 
   $(previouslyDefinedWords).each(function() {
     var wordToDefine = this.word;
     var defn = this.meaning;
 
-    if (onlyThisSpecificWord !== undefined && onlyThisSpecificWord.length > 0){
+    console.log("I should blue highlight: " + wordToDefine);
+
+    if (onlyThisSpecificWord !== undefined && onlyThisSpecificWord.length > 0) {
       if (wordToDefine !== onlyThisSpecificWord) return true; //i.e. "continue this loop, but skip this iteration"
     }
+
+    var listOfWordsToDefine = $("span[class^='word']:textEquals(" + wordToDefine + ")");
 
     $("span[class^='word']:textEquals(" + wordToDefine + ")").each(function() {
       if ($(this).tooltipster()) {
@@ -31,7 +37,7 @@ highlightPreviouslyDefinedWordsInTranscript = function (onlyThisSpecificWord){
 
 addDefinitionToGlobalList = function(word, meaning) {
 
-  allDefinitions = localStorage.getObj("defn");
+  allDefinitions = getDefinitionGlobalList();
 
   if (allDefinitions === null) {
     allDefinitions = [];
@@ -48,7 +54,7 @@ addDefinitionToGlobalList = function(word, meaning) {
 };
 
 removeDefinitionFromGlobalList = function(word) {
-  allDefinitions = localStorage.getObj("defn");
+  allDefinitions = getDefinitionGlobalList();
 
   if (allDefinitions === null) return;
 
@@ -64,19 +70,23 @@ removeDefinitionFromGlobalList = function(word) {
 
 getDefinitionGlobalList = function() {
   allDefinitions = localStorage.getObj("defn");
+  allDefinitions = uniq_fast(allDefinitions);
+
   return allDefinitions;
 };
 
 /*** END Definitions Entered by User ***/
 
 /*** Highlights Entered by User ***/
-highlightPreviouslyHighlightedWordsInTranscript = function (onlyThisSpecificWord){
+highlightPreviouslyHighlightedWordsInTranscript = function(onlyThisSpecificWord) {
   var previouslyHighlightedWords = getHighlightsGlobalList();
 
   $(previouslyHighlightedWords).each(function() {
     var wordToHighlight = this;
 
-    if (onlyThisSpecificWord !== undefined && onlyThisSpecificWord.length > 0){
+    console.log("I should YELLOW highlight: " + wordToHighlight);
+
+    if (onlyThisSpecificWord !== undefined && onlyThisSpecificWord.length > 0) {
       if (wordToHighlight !== onlyThisSpecificWord) return true; //i.e. "continue this loop, but skip this iteration"
     }
 
@@ -89,7 +99,7 @@ highlightPreviouslyHighlightedWordsInTranscript = function (onlyThisSpecificWord
 
 addHighlightToGlobalList = function(word) {
 
-  allHighlights = localStorage.getObj("highlights");
+  allHighlights = getHighlightsGlobalList();
 
   if (allHighlights === null) {
     allHighlights = [];
@@ -101,7 +111,7 @@ addHighlightToGlobalList = function(word) {
 };
 
 removeHighlightFromGlobalList = function(word) {
-  allHighlights = localStorage.getObj("highlights");
+  allHighlights = getHighlightsGlobalList();
 
   if (allHighlights === null) return;
 
@@ -118,6 +128,7 @@ removeHighlightFromGlobalList = function(word) {
 
 getHighlightsGlobalList = function() {
   allHighlights = localStorage.getObj("highlights");
+  allHighlights = uniq_fast(allHighlights);
   return allHighlights;
 };
 

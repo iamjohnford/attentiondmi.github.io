@@ -3,36 +3,56 @@ $(document).ready(function() {
 });
 
 /*** Definitions Entered by User ***/
-highlightPreviouslyDefinedWordsInTranscript = function(onlyThisSpecificWord) {
+highlightPreviouslyDefinedWordsInTranscript = function() {
   var previouslyDefinedWords = getDefinitionGlobalList();
 
-
+  var massiveSelectorString = "";
+  allMeanings = [];
 
   $(previouslyDefinedWords).each(function() {
     var wordToDefine = this.word;
     var defn = this.meaning;
 
-    console.log("I should blue highlight: " + wordToDefine);
+    // console.log("I''ll need to eventually blue highlight: " + wordToDefine + "...");
+    // console.log("... with a meaning of: " + defn);
 
-    if (onlyThisSpecificWord !== undefined && onlyThisSpecificWord.length > 0) {
-      if (wordToDefine !== onlyThisSpecificWord) return true; //i.e. "continue this loop, but skip this iteration"
+    allMeanings.push(defn);
+
+    massiveSelectorString = massiveSelectorString + "span[class^='word']:textEquals('" + wordToDefine + "')" + ", ";
+  });
+
+  massiveSelectorString = massiveSelectorString.slice(0, -2); //slice off the last comma + space
+
+  var listOfWordsToDefine = $(massiveSelectorString);
+  // console.log("Now the list of words to define is: " + listOfWordsToDefine);
+
+  $(massiveSelectorString).addClass("hasDefinitionNow");
+
+  console.log("Destroying any existing tooltips");
+  $(massiveSelectorString).each(function() {
+    console.log("... for " + $(this));
+    if ($(this).tooltipster()) {
+      $(this).tooltipster('destroy');
     }
 
-    var listOfWordsToDefine = $("span[class^='word']:textEquals(" + wordToDefine + ")");
 
-    $("span[class^='word']:textEquals(" + wordToDefine + ")").each(function() {
-      if ($(this).tooltipster()) {
-        $(this).tooltipster('destroy');
-      }
-
-      $(this).tooltipster({
-        content: $('<span>' + defn + '</span>')
-      });
-
-      $(this).addClass("hasDefinitionNow");
+    var curMeaning = allMeanings.shift();
+    console.log("Assigning to this one a meaning of: " + curMeaning);
+    $(this).tooltipster({
+      content: $('<span>' + curMeaning + '</span>')
     });
-
   });
+
+  // if ($(listOfWordsToDefine).tooltipster()) {
+  //   $(listOfWordsToDefine).tooltipster('destroy');
+  // }
+  //
+  // $(listOfWordsToDefine).tooltipster({
+  //   content: $('<span>' + defn + '</span>')
+  // });
+  //
+  // $(listOfWordsToDefine).addClass("hasDefinitionNow");
+
 };
 
 addDefinitionToGlobalList = function(word, meaning) {

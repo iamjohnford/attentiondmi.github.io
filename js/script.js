@@ -132,18 +132,14 @@ $(document).ready(function() {
 
   //return an array with only unique vals
   uniq_fast = function(arr) {
-    var seen = {};
-    var out = [];
-    var len = arr.length;
-    var j = 0;
-    for (var i = 0; i < len; i++) {
-      var item = arr[i];
-      if (seen[item] !== 1) {
-        seen[item] = 1;
-        out[j++] = item;
-      }
-    }
-    return out;
+
+    return arr.slice().sort(function(a, b) {
+      return a - b;
+    }).reduce(function(a, b) {
+      if (a.slice(-1)[0] !== b) a.push(b);
+      return a;
+    }, []);
+
   };
 });
 //end doc ready

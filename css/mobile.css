@@ -1,28 +1,44 @@
 /*** RESPONSIVE Optimizations ***/
 
+
 /*** Orientation Warning for mobile ***/
 
-/* for all screens */
-#orientationWarning {display: none;}
 
-/* only when orientation is in portrait mode */
-@media all and (orientation:portrait) {
-    #orientationWarning {
-         display: block;
-         height:100%;
-         width:100%;
-         position:fixed;
-         background:black;
-         color:white;
-         z-index: 10000;
-         padding:100px;
-         text-align: center;
-    }
+/* for all screens */
+
+#orientationWarning {
+  display: none;
 }
 
+
+/* only when orientation is in portrait mode */
+
+@media all and (orientation:portrait) {
+  #orientationWarning {
+    display: block;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    background: black;
+    color: white;
+    z-index: 10000;
+    padding: 100px;
+    text-align: center;
+  }
+}
+
+
 /* Desktops and laptops ----------- */
-@media only screen and (max-width : 1224px) {
+
+@media only screen and (max-width: 1224px) {
   a.logo, .control_label {
     display: none !important;
+  }
+  .player_control {
+    padding-right: 5px !important;
+    padding-left: 5px !important;
+  }
+  .main-sidebar {
+    padding-top: 0 !important;
   }
 }

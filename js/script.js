@@ -11,18 +11,22 @@ $(document).ready(function() {
   $('body').on('click', '.highlight', function() {
     currentlySelectedWord = this;
 
+
     var wordToLookup = this.innerText;
-    wordToLookup = wordToLookup.replace(/[,.\s]+/g, '').trim();
+    console.log("The word to look up is: " + wordToLookup);
+
+
+    wordToLookup = removePunctuation(wordToLookup.trim());
+
+    console.log("After processing, that word to look up is: " + wordToLookup);
 
     if (!dvPlayer.paused()) {
       pauseAudio();
       playerWasPlayingAndIsNowTemporarilyPaused = true;
     }
 
-    console.log("About to show the dictionary with a lookup for: " + wordToLookup);
+    console.log("Showing dictionary...");
     showDictionary(wordToLookup);
-
-
   });
 
   $('body').on('click', '.sidebar_item', function(e) {
@@ -46,7 +50,11 @@ $(document).ready(function() {
 
     hideLeftSideBar();
     hideDictionary();
-    $("html, body").animate({ scrollTop: 0 }, "slow");
+
+    $("html, body").animate({
+      scrollTop: 0
+    }, "slow");
+
     highlightPreviouslyDefinedWordsInTranscript();
     highlightPreviouslyHighlightedWordsInTranscript();
     e.preventDefault();
@@ -90,12 +98,17 @@ $(document).ready(function() {
     }
   });
 
+
   //Extend jquery with plugin
   $.expr[':'].textEquals = $.expr.createPseudo(function(arg) {
     return function(elem) {
       return $(elem).text().replace(/[,.\s]+/g, '').match("^" + arg.replace(/[,.\s]+/g, '') + "$");
     };
   });
+
+  var removePunctuation = function(str) {
+    return str.replace(/['!"#$%&\\'()\*+,\-\.\/:;<=>?@\[\\\]\^_`{|}~']/g,"");
+  };
 
   //Update sidebar positions depending on scroll position
 
@@ -141,10 +154,15 @@ var showDictionary = function(lookupWord) {
   $('#open_right_sidebar').html('<i class="fa fa-hand-o-right"> Hide Dictionary</i>');
   makeNavMenuFixed();
 
+  // if (isMobile()) {
+  //   console.log("Yep, we're mobile, so hiding the controls.");
+  //   $('.player_control').hide();
+  // }
+
+
   //The following has to go here because the submit_definition_box element was just dynamically created
   //And it gets dynamically recreated. As a result, we have to re-bind the below event to it at
   //each time of dynamic creation. I'm sure there's a better way, but this works
-
   $("input#submit_definition_box").keypress(function(e) {
     if (e.which == 13) {
       // console.log("Using the definition you typed and pressing ENTER");
@@ -179,4 +197,13 @@ var makeNavMenuStatic = function() {
   $('.navbar').removeClass('navbar-static-top');
   $('.navbar').addClass('navbar-static-top');
   $('.content-header').css("margin-top", "0px");
+};
+
+var isMobile = function() {
+  try {
+    document.createEvent("TouchEvent");
+    return true;
+  } catch (e) {
+    return false;
+  }
 };

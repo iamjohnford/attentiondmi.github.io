@@ -80,8 +80,6 @@ highlightPreviouslyHighlightedWordsInTranscript = function (onlyThisSpecificWord
       if (wordToHighlight !== onlyThisSpecificWord) return true; //i.e. "continue this loop, but skip this iteration"
     }
 
-    console.log("I want to highlight: " + wordToHighlight);
-
     $("span[class^='word']:textEquals(" + wordToHighlight + ")").each(function() {
       $(this).addClass("highlight");
     });
@@ -97,8 +95,6 @@ addHighlightToGlobalList = function(word) {
     allHighlights = [];
   }
 
-  console.log("The raw word to highlight is: " + word);
-  console.log("After removing punctuation, the word that will be highlighted is: " + word);
   allHighlights.push(word);
 
   localStorage.setObj("highlights", allHighlights);

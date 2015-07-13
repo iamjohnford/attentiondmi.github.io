@@ -41,9 +41,17 @@ playPauseAudio = function() {
   }
 };
 
+playAudio = function() {
+  skipNumSeconds(-2);
+  dvPlayer.play();
+  $('#control_playpause').html('<i id="play_pause_button" class="fa fa-pause faa-pulse animated"></i> Pause');
+  makeNavMenuStatic();
+};
+
 pauseAudio = function() {
   dvPlayer.pause();
   makeNavMenuFixed();
+  $('#control_playpause').html('<i id="play_pause_button" class="fa fa-play-circle faa-wrench animated"></i> Play');
 };
 
 

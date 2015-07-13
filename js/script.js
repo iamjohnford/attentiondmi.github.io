@@ -34,10 +34,22 @@ $(document).ready(function() {
     var title = $(this).attr("media_title");
     var transcript = $(this).attr("media_content");
     var media_url = $(this).attr("media_url");
-    var value = transcript.replace(/\n/g, '<br />');
+
+    // transcript = transcript.replace(/\n/g, '<br />');
+
+
+    console.log("The transcript before: " + transcript);
+    //remove blank lines from transcript first
+    transcript = transcript.replace(new RegExp('\n?\r?\n', 'g'), '<br />');
+
+    //
+    // transcript = transcript.replace(/\n/g, '<br />');
+    console.log("The transcript is now: " + transcript);
+
 
     $(".dvIntroduction").hide();
-    $("#dv_transcript_korean").html("<span class='dvSentence' language='ko'>" + value + "</span>");
+    $("#dv_transcript_korean").html("<span class='dvSentence' language='ko'>" + transcript + "</span>");
+
 
     $(".dvSentence").lettering('lines').children('span').lettering('words');
     $('span[class^="word"]').wordBreakKeepAll(); //prevent Korean words from being broken apart
@@ -107,7 +119,7 @@ $(document).ready(function() {
   });
 
   var removePunctuation = function(str) {
-    return str.replace(/['!"#$%&\\'()\*+,\-\.\/:;<=>?@\[\\\]\^_`{|}~']/g,"");
+    return str.replace(/['!"#$%&\\'()\*+,\-\.\/:;<=>?@\[\\\]\^_`{|}~']/g, "");
   };
 
   //Update sidebar positions depending on scroll position
@@ -177,6 +189,7 @@ var hideDictionary = function() {
   $('.control-sidebar').removeClass('control-sidebar-open');
   $('#open_right_sidebar').html('<i class="fa fa-hand-o-left"> Show Dictionary</i>');
   makeNavMenuStatic();
+  playAudio();
 };
 
 var hideLeftSideBar = function() {

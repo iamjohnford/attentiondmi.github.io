@@ -17,6 +17,11 @@ videojs("the_media", {}, function() {
     if (oldString !== newString && percent > 0) {
       $("#percent_done").html(" " + newString);
     }
+
+    //Make sure "Pause" button switches back to "Play" when the audio ends
+    if (roundedPercent > 99) {
+      $('#control_playpause').html('<i id="play_pause_button" class="fa fa-play-circle faa-wrench animated"></i> Play');
+    }
   });
 });
 

@@ -12,7 +12,7 @@ highlightPreviouslyDefinedWordsInTranscript = function(onlyThisSpecificWord) {
     var wordToDefine = this.word;
     var defn = this.meaning;
 
-    console.log("I should blue highlight: " + wordToDefine);
+    // console.log("I should blue highlight: " + wordToDefine);
 
     if (onlyThisSpecificWord !== undefined && onlyThisSpecificWord.length > 0) {
       if (wordToDefine !== onlyThisSpecificWord) return true; //i.e. "continue this loop, but skip this iteration"
@@ -84,7 +84,7 @@ highlightPreviouslyHighlightedWordsInTranscript = function(onlyThisSpecificWord)
   $(previouslyHighlightedWords).each(function() {
     var wordToHighlight = this;
 
-    console.log("I should YELLOW highlight: " + wordToHighlight);
+    // console.log("I should YELLOW highlight: " + wordToHighlight);
 
     if (onlyThisSpecificWord !== undefined && onlyThisSpecificWord.length > 0) {
       if (wordToHighlight !== onlyThisSpecificWord) return true; //i.e. "continue this loop, but skip this iteration"

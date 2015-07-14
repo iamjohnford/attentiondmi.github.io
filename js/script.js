@@ -4,23 +4,7 @@ $(document).ready(function() {
       currentLanguage = "ko";
 
       $('body').on('click', 'span[class^="word"]', function(e) {
-        var selectedText = $(this).text();
-        addHighlightToGlobalList(selectedText);
-        highlightPreviouslyHighlightedWordsInTranscript();
-      });
-
-      $('body').on('click', '.highlight', function() {
         currentlySelectedWord = this;
-
-        var wordToLookup = this.innerText;
-        wordToLookup = removePunctuation(wordToLookup.trim());
-
-        if (!dvPlayer.paused()) {
-          pauseAudio();
-          playerWasPlayingAndIsNowTemporarilyPaused = true;
-        }
-
-        showDictionary(wordToLookup);
       });
 
       $('body').on('click', '.sidebar_item', function(e) {
@@ -57,6 +41,11 @@ $(document).ready(function() {
 
         $('body').on('click', '.submit_definition_button', function(e) {
           var defn = $("#submit_definition_box").val();
+          
+          if (defn.length < 1) {
+            $(this).removeClass("hasDefinitionNow");
+          }
+          
           var wordToDefine = $(currentlySelectedWord).text().trim();
 
           addDefinitionToGlobalList(wordToDefine, defn);
@@ -99,11 +88,9 @@ $(document).ready(function() {
           };
         });
 
-        var removePunctuation = function(str) {
+        removePunctuation = function(str) {
           return str.replace(/['!"#$%&\\'()\*+,\-\.\/:;<=>?@\[\\\]\^_`{|}~']/g, "");
         };
-
-        //Update sidebar positions depending on scroll position
 
         //Extend jquery or javascript with plugins and functions
         $.fn.visibleHeight = function() {
@@ -128,7 +115,9 @@ $(document).ready(function() {
 
         //return an array with only unique vals
         uniq_fast = function(arr) {
-
+          if (arr === undefined || arr === null){
+            return [];
+          }
           return arr.slice().sort(function(a, b) {
             return a - b;
           }).reduce(function(a, b) {

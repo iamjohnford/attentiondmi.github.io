@@ -6,8 +6,6 @@ $(document).ready(function() {
 highlightPreviouslyDefinedWordsInTranscript = function(onlyThisSpecificWord) {
   var previouslyDefinedWords = getDefinitionGlobalList();
 
-
-
   $(previouslyDefinedWords).each(function() {
     var wordToDefine = this.word;
     var defn = this.meaning;
@@ -28,6 +26,9 @@ highlightPreviouslyDefinedWordsInTranscript = function(onlyThisSpecificWord) {
       $(this).tooltipster({
         content: $('<span>' + defn + '</span>')
       });
+      
+      console.log("Inside of highlightPreviouslyDefinedWordsInTranscript(), the meaning is: " + defn);
+      $(this).attr("meaning", defn);
 
       $(this).addClass("hasDefinitionNow");
     });
@@ -127,6 +128,11 @@ removeHighlightFromGlobalList = function(word) {
 };
 
 getHighlightsGlobalList = function() {
+
+  if (localStorage.getObj("highlights") === undefined || localStorage.getObj("highlights") === null) {
+    return [];
+  }
+
   allHighlights = localStorage.getObj("highlights");
   allHighlights = uniq_fast(allHighlights);
   return allHighlights;

@@ -5,12 +5,12 @@ $(function() {
     callback: function(key, options) {
       if (key.toLowerCase().indexOf("highlight") > -1) {
         var wordToHighlight = currentlySelectedWord.innerText;
-
+        
         alreadyHighlighted = $(currentlySelectedWord).hasClass("highlight");
 
         if (alreadyHighlighted) {
           removeHighlightFromGlobalList(wordToHighlight);
-          $("span[class^='word']:textEquals(" + wordToHighlight + ")").removeClass("highlight");
+          addOrRemoveClassIfTextContains("span[class^='word']", wordToHighlight, "highlight", false);          
         } else {
           addHighlightToGlobalList(wordToHighlight);
         }
@@ -21,22 +21,22 @@ $(function() {
 
         var wordToLookup = currentlySelectedWord.innerText;
 
-        console.log("Okay. I'm gonna define: " + wordToLookup);
-
         wordToLookup = removePunctuation(wordToLookup.trim());
 
         if (!dvPlayer.paused()) {
           pauseAudio();
           playerWasPlayingAndIsNowTemporarilyPaused = true;
-        }
+        }        
 
         var meaning = $(this).attr("meaning");
-
-        console.log("the meaning to put in the submit box is:" + meaning);
         
         showDictionary(wordToLookup);
 
         $('#submit_definition_box').val(meaning);
+      }
+      else if(key.toLowerCase().indexOf("define") > -1){
+        console.log("About to bring up modal for definitions!");
+        $('#modal_definitions').modal();
       }
     },
     items: {
@@ -45,6 +45,9 @@ $(function() {
       },
       "lookup": {
         name: "Dictionary Lookup"
+      },
+      "define": {
+        name: "Give a Definition"
       }
     }
   });

@@ -3,22 +3,34 @@ $(document).ready(function() {
 });
 
 /*** Definitions Entered by User ***/
-highlightPreviouslyDefinedWordsInTranscript = function(onlyThisSpecificWord) {
+highlightPreviouslyDefinedWordsInTranscript = function() {
+
   var previouslyDefinedWords = getDefinitionGlobalList();
 
   $(previouslyDefinedWords).each(function() {
     var wordToDefine = this.word;
+    wordToDefine = removePunctuation(wordToDefine.trim());
+    
     var defn = this.meaning;
+    defn = removePunctuation(defn.trim());
 
-    // console.log("I should blue highlight: " + wordToDefine);
+    var listOfWordsToDefine = function() {
+      containsSearchTerm = wordToDefine;
 
-    if (onlyThisSpecificWord !== undefined && onlyThisSpecificWord.length > 0) {
-      if (wordToDefine !== onlyThisSpecificWord) return true; //i.e. "continue this loop, but skip this iteration"
-    }
+      return $('span[class^="word"]:contains("' + containsSearchTerm + '")').filter(function(index) {
 
-    var listOfWordsToDefine = $("span[class^='word']:textEquals(" + wordToDefine + ")");
+        var searchText = containsSearchTerm;
+        var compareText = removePunctuation($(this).text().trim());
 
-    $("span[class^='word']:textEquals(" + wordToDefine + ")").each(function() {
+        if (compareText === searchText) {
+          return $(this);
+        }
+
+      });
+    };
+    
+
+    $(listOfWordsToDefine()).each(function() {
       if ($(this).tooltipster()) {
         $(this).tooltipster('destroy');
       }
@@ -26,8 +38,8 @@ highlightPreviouslyDefinedWordsInTranscript = function(onlyThisSpecificWord) {
       $(this).tooltipster({
         content: $('<span>' + defn + '</span>')
       });
-      
-      console.log("Inside of highlightPreviouslyDefinedWordsInTranscript(), the meaning is: " + defn);
+
+
       $(this).attr("meaning", defn);
 
       $(this).addClass("hasDefinitionNow");
@@ -37,6 +49,9 @@ highlightPreviouslyDefinedWordsInTranscript = function(onlyThisSpecificWord) {
 };
 
 addDefinitionToGlobalList = function(word, meaning) {
+
+  word = word.trim();
+  meaning = meaning.trim();
 
   allDefinitions = getDefinitionGlobalList();
 
@@ -56,6 +71,7 @@ addDefinitionToGlobalList = function(word, meaning) {
 
 removeDefinitionFromGlobalList = function(word) {
   allDefinitions = getDefinitionGlobalList();
+  word = word.trim();
 
   if (allDefinitions === null) return;
 
@@ -78,27 +94,31 @@ getDefinitionGlobalList = function() {
 
 /*** END Definitions Entered by User ***/
 
+
+// ------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------
+
+
+
 /*** Highlights Entered by User ***/
-highlightPreviouslyHighlightedWordsInTranscript = function(onlyThisSpecificWord) {
+highlightPreviouslyHighlightedWordsInTranscript = function() {
+
   var previouslyHighlightedWords = getHighlightsGlobalList();
 
   $(previouslyHighlightedWords).each(function() {
     var wordToHighlight = this;
+    wordToHighlight = removePunctuation(wordToHighlight.trim());
 
-    // console.log("I should YELLOW highlight: " + wordToHighlight);
-
-    if (onlyThisSpecificWord !== undefined && onlyThisSpecificWord.length > 0) {
-      if (wordToHighlight !== onlyThisSpecificWord) return true; //i.e. "continue this loop, but skip this iteration"
-    }
-
-    $("span[class^='word']:textEquals(" + wordToHighlight + ")").each(function() {
-      $(this).addClass("highlight");
-    });
+    addOrRemoveClassIfTextContains("span[class^='word']", wordToHighlight, "highlight", true);
 
   });
 };
 
 addHighlightToGlobalList = function(word) {
+  word = word.trim();
 
   allHighlights = getHighlightsGlobalList();
 
@@ -107,22 +127,26 @@ addHighlightToGlobalList = function(word) {
   }
 
   allHighlights.push(word);
-
   localStorage.setObj("highlights", allHighlights);
+
+  allHighlights = getHighlightsGlobalList();
 };
 
 removeHighlightFromGlobalList = function(word) {
   allHighlights = getHighlightsGlobalList();
-
+  
   if (allHighlights === null) return;
 
   var i = allHighlights.length;
   while (i--) {
-    if (allHighlights[i] === word) {
+    var comparer = removePunctuation(allHighlights[i].trim());
+    var wordToRemove = removePunctuation(word.trim());
+    
+    
+    if (comparer === wordToRemove) {
       allHighlights.splice(i, 1);
     }
-  }
-  // delete allHighlights[word];
+  }  
 
   localStorage.setObj("highlights", allHighlights);
 };

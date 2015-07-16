@@ -132,20 +132,20 @@
           <!-- Sidebar Menu -->
           <ul class="sidebar-menu">
             <li class="treeview">
-              <a href="#">
-                <span>Beginner</span> <i class="fa fa-angle-left pull-right"></i></a>
+              <a class="difficulty_level" href="#">
+                <i class="fa fa-fw fa-child"></i> <span> Beginner</span> <i class="fa fa-angle-left pull-right"></i></a>
               <ul class="treeview-menu beginner">
               </ul>
             </li>
             <li class="treeview active">
-              <a href="#">
-                <span>Intermediate</span> <i class="fa fa-angle-left pull-right"></i></a>
+              <a class="difficulty_level" href="#">
+                <i class="fa fa-fw fa-male"></i> <span>Intermediate</span> <i class="fa fa-angle-left pull-right"></i></a>
               <ul class="treeview-menu intermediate">
               </ul>
             </li>
             <li class="treeview">
-              <a href="#">
-                <span>Advanced</span> <i class="fa fa-angle-left pull-right"></i></a>
+              <a class="difficulty_level" href="#">
+                <i class="fa fa-fw fa-street-view"></i> <span>Advanced</span> <i class="fa fa-angle-left pull-right"></i></a>
               <ul class="treeview-menu advanced">
               </ul>
             </li>
@@ -236,41 +236,43 @@
     <aside class="control-sidebar control-sidebar-dark">
 
       <ul class="control-sidebar-menu">
-        <li class="dv_definitions_content">This is where definitions will go</li>
-        <li class="dv_definitions_userentry">
-          <input type="text" id="submit_definition_box" class="submit_definition_box" placeholder="Type your own definition here"></input>
-          <input type="submit" class="submit_definition_button"></input>
-        </li>
+        
       </ul>
-
-
 
       <!-- Add the sidebar's background. This div must be placed
            immediately after the control sidebar -->
       <div class="control-sidebar-bg"></div>
   </div>
   <!-- ./wrapper -->
-  
+
   <!-- dv modals -->
-  
+
   <div class="modal fade" id="modal_definitions">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Enter a definition</h4>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">Please enter your definition below</h4>
+        </div>
+        <div class="modal-body">
+          <div id="dv_definitions_userentry">
+            <input type="text" id="submit_definition_box" class="submit_definition_box" placeholder="Type your own definition here">
+          </input>
+            
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger remove_definition_button">This Word Needs No Definition</button>
+          <button type="button" class="btn btn-success submit_definition_button">Save This Definition</button>
+        </div>
       </div>
-      <div class="modal-body">
-        <p>Please enter your definition below</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Never Mind</button>
-        <button type="button" class="btn btn-danger">Leave This Word With No Definition</button>
-        <button type="button" class="btn btn-primary">Save This Definition</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
 
   <!-- //dv modals -->
 

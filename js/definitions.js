@@ -1,5 +1,7 @@
 $(document).ready(function() {
-
+  $('.modal').on('shown.bs.modal', function() {
+    $("#submit_definition_box").focus();
+  });
 });
 
 /*** Definitions Entered by User ***/
@@ -8,9 +10,12 @@ highlightPreviouslyDefinedWordsInTranscript = function() {
   var previouslyDefinedWords = getDefinitionGlobalList();
 
   $(previouslyDefinedWords).each(function() {
+    
+    var meaningStillWithPunctuation = this.meaning.trim();
+    
     var wordToDefine = this.word;
     wordToDefine = removePunctuation(wordToDefine.trim());
-    
+
     var defn = this.meaning;
     defn = removePunctuation(defn.trim());
 
@@ -28,15 +33,14 @@ highlightPreviouslyDefinedWordsInTranscript = function() {
 
       });
     };
-    
 
     $(listOfWordsToDefine()).each(function() {
-      if ($(this).tooltipster()) {
+      if ($(this).hasClass("tooltipstered")) {
         $(this).tooltipster('destroy');
       }
 
       $(this).tooltipster({
-        content: $('<span>' + defn + '</span>')
+        content: $('<span>' + meaningStillWithPunctuation + '</span>') //can't just be defn, because defn had its punctuation removed, and here we want the original string instead
       });
 
 
@@ -50,7 +54,7 @@ highlightPreviouslyDefinedWordsInTranscript = function() {
 
 addDefinitionToGlobalList = function(word, meaning) {
 
-  word = word.trim();
+  word = removePunctuation(word.trim());
   meaning = meaning.trim();
 
   allDefinitions = getDefinitionGlobalList();
@@ -71,18 +75,37 @@ addDefinitionToGlobalList = function(word, meaning) {
 
 removeDefinitionFromGlobalList = function(word) {
   allDefinitions = getDefinitionGlobalList();
-  word = word.trim();
+  word = removePunctuation(word.trim());
 
-  if (allDefinitions === null) return;
+  // console.log("About to remove the definition for the word: " + word);
+  // console.log("Before, the global list of definitions had numItems=" + getDefinitionGlobalList().length);
+  // 
+  if (allDefinitions === null) {
+    return;
+  }
 
   var i = allDefinitions.length;
   while (i--) {
-    if (allDefinitions[i].word === word) {
-      allDefinitions.splice(i, 1);
+    var existingDefinition = removePunctuation(allDefinitions[i].word);
+    // console.log("Going through the list of definitions, I'm now considering the word [" + existingDefinition +"]");
+    if (existingDefinition === word) {
+      allDefinitions.splice(i, 1); //remove it from the array and close the subsequent hole
     }
   }
-
+  
   localStorage.setObj("defn", allDefinitions);
+
+  $('span[class^="word"]:contains("' + word + '")').filter(function(index) {
+    tester = $(this);
+
+    if ($(this).hasClass("tooltipstered")) {
+      $(this).tooltipster('destroy');
+    }
+
+    $(this).removeClass("hasDefinitionNow");
+  });
+
+  
 };
 
 getDefinitionGlobalList = function() {
@@ -134,19 +157,19 @@ addHighlightToGlobalList = function(word) {
 
 removeHighlightFromGlobalList = function(word) {
   allHighlights = getHighlightsGlobalList();
-  
+
   if (allHighlights === null) return;
 
   var i = allHighlights.length;
   while (i--) {
     var comparer = removePunctuation(allHighlights[i].trim());
     var wordToRemove = removePunctuation(word.trim());
-    
-    
+
+
     if (comparer === wordToRemove) {
       allHighlights.splice(i, 1);
     }
-  }  
+  }
 
   localStorage.setObj("highlights", allHighlights);
 };

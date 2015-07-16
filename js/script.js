@@ -45,27 +45,39 @@ $(document).ready(function() {
 
 
   $('body').on('click', '.submit_definition_button', function(e) {
-    var defn = $("#submit_definition_box").val();
 
-    if (defn.length < 1) {
-      $(this).removeClass("hasDefinitionNow");
-    }
+    console.log("Now trying to save the meaning for the definition");
 
-    var wordToDefine = $(currentlySelectedWord).text().trim();
+    var meaning = $("#submit_definition_box").val();
+    var wordToDefine = removePunctuation($(currentlySelectedWord).text()).trim();
 
-    addDefinitionToGlobalList(wordToDefine, defn);
+
+    addDefinitionToGlobalList(wordToDefine, meaning);
+
+    console.log("The word defined was[" + wordToDefine + "] and the meaning of it was  [" + meaning + "]");
 
     highlightPreviouslyDefinedWordsInTranscript(wordToDefine);
 
-    hideDictionary();
     $("#submit_definition_box").val("");
+
+    $('#modal_definitions').modal('hide');
   });
 
-  $("#filter").keyup(function(e) {
-    var query = $('#filter').val();
+  $('body').on('click', '.remove_definition_button', function(e) {
+    var wordToDefine = removePunctuation($(currentlySelectedWord).text()).trim();
+    removeDefinitionFromGlobalList(wordToDefine);
+    highlightPreviouslyDefinedWordsInTranscript(wordToDefine);
+    
+    $("#submit_definition_box").val("");
 
+    $('#modal_definitions').modal('hide');
+  });
+  $("#filter").keyup(function(e) {
+    $(".treeview").addClass("active");
+    
+    var query = $('#filter').val();
     // var value = $(element).val().toLowerCase();
-    var $li = $(".sidebar li");
+    var $li = $(".sidebar a").not(".difficulty_level");
 
     $li.hide();
     $li.filter(function() {
@@ -86,66 +98,72 @@ $(document).ready(function() {
   });
 
 
+  $("input#submit_definition_box").keypress(function(e) {
+    if (e.which == 13) {
+      // console.log("Using the definition you typed and pressing ENTER");
+      $(".submit_definition_button").click();
+    }
+  });
+
   //Extend jquery
 
-  addOrRemoveClassIfTextContains = function(selector, containsSearchTerm, classToModify, addThisClass){
+  addOrRemoveClassIfTextContains = function(selector, containsSearchTerm, classToModify, addThisClass) {
     containsSearchTerm = removePunctuation(containsSearchTerm.trim());
-    
-    $(selector + ':contains("' + containsSearchTerm + '")').filter(function(index) {  
-            
+
+    $(selector + ':contains("' + containsSearchTerm + '")').filter(function(index) {
+
       var searchText = containsSearchTerm;
       var compareText = removePunctuation($(this).text().trim());
-      
-      if (compareText === searchText){
-        if (addThisClass){
+
+      if (compareText === searchText) {
+        if (addThisClass) {
           $(this).addClass(classToModify);
-        }
-        else{
+        } else {
           $(this).removeClass(classToModify);
         }
       }
     });
   };
 
-removePunctuation = function(str) {
-  str = str.trim();
-  return str.replace(/['!"#$%&\\'()\*+,\-\.\/:;<=>?@\[\\\]\^_`{|}~']/g, "");
-};
+  removePunctuation = function(str) {
+    str = str.trim();
+    return str.replace(/['!"#$%&\\'()\*+,\-\.\/:;<=>?@\[\\\]\^_`{|}~']/g, "");
+  };
 
-//Extend jquery or javascript with plugins and functions
-$.fn.visibleHeight = function() {
-  var elBottom, elTop, scrollBot, scrollTop, visibleBottom, visibleTop;
-  scrollTop = $(window).scrollTop();
-  scrollBot = scrollTop + $(window).height();
-  elTop = this.offset().top;
-  elBottom = elTop + this.outerHeight();
-  visibleTop = elTop < scrollTop ? scrollTop : elTop;
-  visibleBottom = elBottom > scrollBot ? scrollBot : elBottom;
-  return visibleBottom - visibleTop;
-};
+  //Extend jquery or javascript with plugins and functions
+  $.fn.visibleHeight = function() {
+    var elBottom, elTop, scrollBot, scrollTop, visibleBottom, visibleTop;
+    scrollTop = $(window).scrollTop();
+    scrollBot = scrollTop + $(window).height();
+    elTop = this.offset().top;
+    elBottom = elTop + this.outerHeight();
+    visibleTop = elTop < scrollTop ? scrollTop : elTop;
+    visibleBottom = elBottom > scrollBot ? scrollBot : elBottom;
+    return visibleBottom - visibleTop;
+  };
 
-$(window).scroll(function() {
-  var visHeight = $('.navbar').visibleHeight();
+  $(window).scroll(function() {
+    var visHeight = $('.navbar').visibleHeight();
 
-  if (visHeight < 1) {
-    visHeight = 0;
-  }
-  $('.control-sidebar').css("padding-top", visHeight);
-});
+    if (visHeight < 1) {
+      visHeight = 0;
+    }
+    $('.control-sidebar').css("padding-top", visHeight);
+  });
 
-//return an array with only unique vals
-uniq_fast = function(arr) {
-if (arr === undefined || arr === null) {
-  return [];
-}
-return arr.slice().sort(function(a, b) {
-  return a - b;
-}).reduce(function(a, b) {
-  if (a.slice(-1)[0] !== b) a.push(b);
-  return a;
-}, []);
+  //return an array with only unique vals
+  uniq_fast = function(arr) {
+    if (arr === undefined || arr === null) {
+      return [];
+    }
+    return arr.slice().sort(function(a, b) {
+      return a - b;
+    }).reduce(function(a, b) {
+      if (a.slice(-1)[0] !== b) a.push(b);
+      return a;
+    }, []);
 
-};
+  };
 });
 
 //end doc ready
@@ -157,22 +175,26 @@ var showDictionary = function(lookupWord) {
     return;
   }
 
-  var lang = "ee";
-  if (currentLanguage === "en") {
-    lang = "eng";
-  } else {
-    lang = "ee";
-  }
+  // var lang = "ee";
+  // if (currentLanguage === "en") {
+  //   lang = "eng";
+  // } else {
+  //   lang = "ee";
+  // }
 
+  var lang = "eng";
+  
   var definitionURL = "http://dic.daum.net/search.do?q=" + lookupWord + "&dic=" + lang;
+  console.log("The dictionary url I'm loading is:" + definitionURL);
+
   console.log("Preparing dictionary. The language will be: " + lang);
+  
   $('#open_right_sidebar').show();
   $(".control-sidebar").html("<h1>Loading Dictionary...</h1>");
 
   var iframe = "<iframe target='_top' width='100%' height='100%' src=" + definitionURL + "></iframe>";
-  var defineInput = '<div id="dv_definitions_userentry"><input type="text" id="submit_definition_box" class="submit_definition_box" placeholder="Type your own definition here"></input> <input type="submit" class="submit_definition_button" value="Define This"></input></div>';
 
-  $(".control-sidebar").html(iframe + "\r\n" + defineInput);
+  $(".control-sidebar").html(iframe);
 
   $('#open_right_sidebar').html('<i class="fa fa-hand-o-right"> Hide Dictionary</i>');
   makeNavMenuFixed();
@@ -181,17 +203,6 @@ var showDictionary = function(lookupWord) {
   //   console.log("Yep, we're mobile, so hiding the controls.");
   //   $('.player_control').hide();
   // }
-
-
-  //The following has to go here because the submit_definition_box element was just dynamically created
-  //And it gets dynamically recreated. As a result, we have to re-bind the below event to it at
-  //each time of dynamic creation. I'm sure there's a better way, but this works
-  $("input#submit_definition_box").keypress(function(e) {
-    if (e.which == 13) {
-      // console.log("Using the definition you typed and pressing ENTER");
-      $(".submit_definition_button").click();
-    }
-  });
 
 };
 

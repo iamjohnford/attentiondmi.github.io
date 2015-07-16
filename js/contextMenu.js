@@ -14,13 +14,13 @@ $(function() {
     },
     items: {
       "highlight": {
-        name: "<i class='fa fa-fw fa-thumb-tack'></i> Toggle Highlight (H)"
+        name: "<i class='fa fa-fw fa-thumb-tack'></i> Toggle Highlight <span class='contextMenuShortcutKey'>H</span>"
       },
       "lookup": {
-        name: "<i class='fa fa-fw fa-book'></i> Dictionary Lookup (D)"
+        name: "<i class='fa fa-fw fa-book'></i> Dictionary Lookup <span class='contextMenuShortcutKey'>D</span>"
       },
       "define": {
-        name: "<i class='fa fa-fw fa-pencil'></i> My Own Definition (W)"
+        name: "<i class='fa fa-fw fa-pencil'></i> My Own Definition <span class='contextMenuShortcutKey'>W</span>"
       }
     }
   });

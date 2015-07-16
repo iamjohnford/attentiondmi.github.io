@@ -15,7 +15,7 @@ body:not(.pace-done) >:not(.pace), body:not(.pace-done):before, body:not(.pace-d
 
 .context-menu-list {
   /*text-align: center !important;*/
-  width: 300px !important;
+  width: 230px !important;
   max-width: none !important;
 }
 
@@ -29,6 +29,10 @@ body:not(.pace-done) >:not(.pace), body:not(.pace-done):before, body:not(.pace-d
 
 .context-menu-item:hover {
   background-color: rgb(60, 141, 188) !important;
+}
+
+.contextMenuShortcutKey {
+  float: right;
 }
 
 .tooltipster-default {

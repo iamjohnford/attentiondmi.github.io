@@ -31,19 +31,23 @@ body:not(.pace-done) >:not(.pace), body:not(.pace-done):before, body:not(.pace-d
 }
 
 .tooltipster-default {
-  background: red !important;
-  border:none !important;
+  background: #3c8dbc !important;
+  border: 3px solid white !important;
+  border-bottom:5px solid white !important;
 }
 
 .tooltipster-default .tooltipster-content {
   color: white !important;
   font-size: 18px !important;
-  line-height:1.3em !important;
+  line-height: 1.3em !important;
+  text-align: center;
 }
 
 .tooltipster-base {
-  max-width:400px !important;
+  min-width: 75px !important;
+  max-width: 400px !important;
 }
+
 
 /*** Transcript Text Styles ***/
 
@@ -128,7 +132,7 @@ span[class^="line"]:hover {
 
 input#submit_definition_box {
   width: 100%;
-  padding:10px;
+  padding: 10px;
 }
 
 

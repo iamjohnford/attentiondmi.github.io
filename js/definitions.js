@@ -44,7 +44,7 @@ highlightPreviouslyDefinedWordsInTranscript = function() {
       });
 
 
-      $(this).attr("meaning", defn);
+      $(this).attr("meaning", meaningStillWithPunctuation);
 
       $(this).addClass("hasDefinitionNow");
     });

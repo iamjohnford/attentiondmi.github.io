@@ -1,5 +1,3 @@
-playerWasPlayingAndIsNowTemporarilyPaused = false;
-
 videojs("the_media", {}, function() {
   // Player (this) is initialized and ready.
   dvPlayer = this;
@@ -30,7 +28,7 @@ loadMediaPlayer = function(media_url) {
     "type": "audio/mp3",
     "src": media_url,
   });
-  playPauseAudio();
+  playAudio();
 };
 
 playPauseAudio = function() {
@@ -64,6 +62,10 @@ skipNumSeconds = function(numSeconds) {
   var curTime = dvPlayer.currentTime();
   dvPlayer.currentTime(curTime + numSeconds);
   console.log("Skipping " + numSeconds + " seconds ;)");
+};
+
+nowPlaying = function(){  
+  return ! dvPlayer.paused();
 };
 
 // ************* CLICK EVENTS *************

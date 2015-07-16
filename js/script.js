@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+  playerWasPlayingAndIsNowTemporarilyPaused = false;
   currentlySelectedWord = "";
   currentLanguage = "ko";
 
@@ -33,6 +34,7 @@ $(document).ready(function() {
     hideLeftSideBar();
     hideDictionary();
 
+    //scroll the transcript to the top when it loads up
     $("html, body").animate({
       scrollTop: 0
     }, "slow");
@@ -51,7 +53,6 @@ $(document).ready(function() {
     var meaning = $("#submit_definition_box").val();
     var wordToDefine = removePunctuation($(currentlySelectedWord).text()).trim();
 
-
     addDefinitionToGlobalList(wordToDefine, meaning);
 
     console.log("The word defined was[" + wordToDefine + "] and the meaning of it was  [" + meaning + "]");
@@ -67,14 +68,15 @@ $(document).ready(function() {
     var wordToDefine = removePunctuation($(currentlySelectedWord).text()).trim();
     removeDefinitionFromGlobalList(wordToDefine);
     highlightPreviouslyDefinedWordsInTranscript(wordToDefine);
-    
+
     $("#submit_definition_box").val("");
 
     $('#modal_definitions').modal('hide');
   });
+  
   $("#filter").keyup(function(e) {
     $(".treeview").addClass("active");
-    
+
     var query = $('#filter').val();
     // var value = $(element).val().toLowerCase();
     var $li = $(".sidebar a").not(".difficulty_level");
@@ -85,7 +87,6 @@ $(document).ready(function() {
     }).show();
 
   });
-
 
   $('body').on('click', '#open_right_sidebar', function(e) {
     if (this.innerText.indexOf("Hide") > 0) {
@@ -100,7 +101,6 @@ $(document).ready(function() {
 
   $("input#submit_definition_box").keypress(function(e) {
     if (e.which == 13) {
-      // console.log("Using the definition you typed and pressing ENTER");
       $(".submit_definition_button").click();
     }
   });
@@ -131,6 +131,7 @@ $(document).ready(function() {
   };
 
   //Extend jquery or javascript with plugins and functions
+  //.visibleHeight is used for controlling whether the menu shows up when scrolling on mobile
   $.fn.visibleHeight = function() {
     var elBottom, elTop, scrollBot, scrollTop, visibleBottom, visibleTop;
     scrollTop = $(window).scrollTop();
@@ -170,6 +171,15 @@ $(document).ready(function() {
 
 var showDictionary = function(lookupWord) {
 
+console.log("The value of nowPlaying() is: " + nowPlaying());
+  if (nowPlaying()) {
+    console.log("The audio was playing before, and is now paused for a moment");
+    playerWasPlayingAndIsNowTemporarilyPaused = true;
+  } else {
+    console.log("The audio was NOT PLAYING when I went to show the dictionary");
+    playerWasPlayingAndIsNowTemporarilyPaused = false;
+  }
+  
   $('.control-sidebar').addClass('control-sidebar-open');
   if (lookupWord === "" || lookupWord === undefined) {
     return;
@@ -183,12 +193,9 @@ var showDictionary = function(lookupWord) {
   // }
 
   var lang = "eng";
-  
-  var definitionURL = "http://dic.daum.net/search.do?q=" + lookupWord + "&dic=" + lang;
-  console.log("The dictionary url I'm loading is:" + definitionURL);
 
-  console.log("Preparing dictionary. The language will be: " + lang);
-  
+  var definitionURL = "http://dic.daum.net/search.do?q=" + lookupWord + "&dic=" + lang;
+
   $('#open_right_sidebar').show();
   $(".control-sidebar").html("<h1>Loading Dictionary...</h1>");
 
@@ -198,6 +205,9 @@ var showDictionary = function(lookupWord) {
 
   $('#open_right_sidebar').html('<i class="fa fa-hand-o-right"> Hide Dictionary</i>');
   makeNavMenuFixed();
+
+  
+
 
   // if (isMobile()) {
   //   console.log("Yep, we're mobile, so hiding the controls.");
@@ -211,7 +221,7 @@ var hideDictionary = function() {
   $('.control-sidebar').removeClass('control-sidebar-open');
   $('#open_right_sidebar').html('<i class="fa fa-hand-o-left"> Show Dictionary</i>');
   makeNavMenuStatic();
-  playAudio();
+  if (playerWasPlayingAndIsNowTemporarilyPaused) {playAudio();}
 };
 
 var hideLeftSideBar = function() {

@@ -43,7 +43,6 @@ highlightPreviouslyDefinedWordsInTranscript = function() {
         content: $('<span>' + meaningStillWithPunctuation + '</span>') //can't just be defn, because defn had its punctuation removed, and here we want the original string instead
       });
 
-
       $(this).attr("meaning", meaningStillWithPunctuation);
 
       $(this).addClass("hasDefinitionNow");
@@ -96,7 +95,6 @@ removeDefinitionFromGlobalList = function(word) {
   localStorage.setObj("defn", allDefinitions);
 
   $('span[class^="word"]:contains("' + word + '")').filter(function(index) {
-    tester = $(this);
 
     if ($(this).hasClass("tooltipstered")) {
       $(this).tooltipster('destroy');
@@ -132,6 +130,7 @@ highlightPreviouslyHighlightedWordsInTranscript = function() {
   var previouslyHighlightedWords = getHighlightsGlobalList();
 
   $(previouslyHighlightedWords).each(function() {
+    tester=this;
     var wordToHighlight = this;
     wordToHighlight = removePunctuation(wordToHighlight.trim());
 

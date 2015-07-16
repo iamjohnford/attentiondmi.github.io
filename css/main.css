@@ -14,8 +14,9 @@ body:not(.pace-done) >:not(.pace), body:not(.pace-done):before, body:not(.pace-d
 /*** Context Menu ***/
 
 .context-menu-list {
-  text-align: center !important;
-  width: 160px !important;
+  /*text-align: center !important;*/
+  width: 300px !important;
+  max-width: none !important;
 }
 
 .context-menu-item {

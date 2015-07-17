@@ -138,8 +138,17 @@ span[class^="line"]:hover {
   text-align: left;
 }
 
+/*** Dictionary Iframe from Daum  ***/
+
+
 #cMain {
   padding: 20px
+}
+
+.dictionary_embed{
+  height:100%;
+  -webkit-overflow-scrolling: touch;
+  	overflow-y: scroll;
 }
 
 
@@ -185,9 +194,7 @@ input#submit_definition_box {
 /*** Right Sidebar ***/
 
 .control-sidebar {
-  position: fixed;
   height: 100%;
-  overflow: hidden;
 }
 
 

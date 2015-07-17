@@ -49,14 +49,10 @@ $(document).ready(function() {
 
   $('body').on('click', '.submit_definition_button', function(e) {
 
-    console.log("Now trying to save the meaning for the definition");
-
     var meaning = $("#submit_definition_box").val();
     var wordToDefine = removePunctuation($(currentlySelectedWord).text()).trim();
 
     addDefinitionToGlobalList(wordToDefine, meaning);
-
-    console.log("The word defined was[" + wordToDefine + "] and the meaning of it was  [" + meaning + "]");
 
     highlightPreviouslyDefinedWordsInTranscript(wordToDefine);
 
@@ -195,13 +191,13 @@ var showDictionary = function(lookupWord) {
     //   lang = "ee";
     // }
     
-    $(".control-sidebar").html("<h1>Loading Dictionary...</h1>");
+    $(".dictionary_embed").html("<h1>Loading Dictionary...</h1>");
     
     var lang = "eng";
 
     var definitionURL = "http://dic.daum.net/search.do?q=" + lookupWord + "&dic=" + lang;
     var iframe = "<iframe target='_top' width='100%' height='100%' src=" + definitionURL + "></iframe>";
-    $(".control-sidebar").html(iframe);
+    $(".dictionary_embed").html(iframe);
   } 
   
   //otherwise just show the sidebar with the previous lookup still there

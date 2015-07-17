@@ -10,34 +10,7 @@ $(document).ready(function() {
   });
 
   slider.on('change', function() {
-
-
-    var speedVal = Math.round(slider.val());
-
-    console.log("The val is: " + speedVal);
-
-    switch (speedVal) {
-      case 5.00:
-        $(".speed_slider_status").text("Lightning Speed");
-        playbackSpeed(1.4);
-        break;
-      case 4.00:
-        $(".speed_slider_status").text("Fast Speed");
-        playbackSpeed(1.2);
-        break;
-      case 3.00:
-        $(".speed_slider_status").text("Normal Speed");
-        playbackSpeed(1.0);
-        break;
-      case 2.00:
-        $(".speed_slider_status").text("Slow Speed");
-        playbackSpeed(0.8);
-        break;
-      case 1.00:
-        $(".speed_slider_status").text("Crawling Speed");
-        playbackSpeed(0.6);
-        break;
-    }
+    updateAudioSpeedBasedOnSlider();
   });
 });
 
@@ -71,6 +44,7 @@ loadMediaPlayer = function(media_url) {
     "type": "audio/mp3",
     "src": media_url,
   });
+  updateAudioSpeedBasedOnSlider();
   playAudio();
 };
 
@@ -104,11 +78,37 @@ pauseAudio = function() {
 skipNumSeconds = function(numSeconds) {
   var curTime = dvPlayer.currentTime();
   dvPlayer.currentTime(curTime + numSeconds);
-  console.log("Skipping " + numSeconds + " seconds ;)");
 };
 
 playbackSpeed = function(speedVal) {
   dvPlayer.playbackRate(speedVal);
+};
+
+updateAudioSpeedBasedOnSlider = function() {
+  var speedVal = Math.round(slider.val());
+
+  switch (speedVal) {
+    case 5.00:
+      $(".speed_slider_status").text("Lightning Speed");
+      playbackSpeed(1.4);
+      break;
+    case 4.00:
+      $(".speed_slider_status").text("Fast Speed");
+      playbackSpeed(1.2);
+      break;
+    case 3.00:
+      $(".speed_slider_status").text("Normal Speed");
+      playbackSpeed(1.0);
+      break;
+    case 2.00:
+      $(".speed_slider_status").text("Slow Speed");
+      playbackSpeed(0.8);
+      break;
+    case 1.00:
+      $(".speed_slider_status").text("Crawling Speed");
+      playbackSpeed(0.6);
+      break;
+  }
 };
 
 nowPlaying = function() {
@@ -122,7 +122,7 @@ $(document).ready(function() {
   //Key Bindings
 
   $(document).on('keydown', null, 'ctrl', function() {
-    console.log("Just control pressed!");
+    
   });
 
   $(document).on('keydown', null, 'ctrl+1', function() {

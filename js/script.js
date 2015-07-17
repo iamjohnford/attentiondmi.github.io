@@ -89,10 +89,14 @@ $(document).ready(function() {
   });
 
   $('body').on('click', '#open_right_sidebar', function(e) {
+    console.log("The dictionary button text is:"  + this.innerText);
+    
     if (this.innerText.indexOf("Hide") > 0) {
+      console.log("Therefore, I'm going to hide the dictionary and thus change the text to 'show'");
       hideDictionary();
       e.preventDefault();
     } else {
+      console.log("Therefore, I'm going to show the dictionary and thus change the text to 'hide'");
       showDictionary();
       e.preventDefault();
     }
@@ -171,42 +175,40 @@ $(document).ready(function() {
 
 var showDictionary = function(lookupWord) {
 
-console.log("The value of nowPlaying() is: " + nowPlaying());
-  if (nowPlaying()) {
-    console.log("The audio was playing before, and is now paused for a moment");
-    playerWasPlayingAndIsNowTemporarilyPaused = true;
-  } else {
-    console.log("The audio was NOT PLAYING when I went to show the dictionary");
-    playerWasPlayingAndIsNowTemporarilyPaused = false;
-  }
+  // console.log("The value of nowPlaying() is: " + nowPlaying());
+  // if (nowPlaying()) {
+  //   console.log("The audio was playing before, and is now paused for a moment");
+  //   playerWasPlayingAndIsNowTemporarilyPaused = true;
+  // } else {
+  //   console.log("The audio was NOT PLAYING when I went to show the dictionary");
+  //   playerWasPlayingAndIsNowTemporarilyPaused = false;
+  // }
   
   $('.control-sidebar').addClass('control-sidebar-open');
-  if (lookupWord === "" || lookupWord === undefined) {
-    return;
-  }
+  
+  if (lookupWord !== undefined && lookupWord.length > 0) {
+    // var lang = "ee";
+    // if (currentLanguage === "en") {
+    //   lang = "eng";
+    // } else {
+    //   lang = "ee";
+    // }
+    
+    $(".control-sidebar").html("<h1>Loading Dictionary...</h1>");
+    
+    var lang = "eng";
 
-  // var lang = "ee";
-  // if (currentLanguage === "en") {
-  //   lang = "eng";
-  // } else {
-  //   lang = "ee";
-  // }
-
-  var lang = "eng";
-
-  var definitionURL = "http://dic.daum.net/search.do?q=" + lookupWord + "&dic=" + lang;
+    var definitionURL = "http://dic.daum.net/search.do?q=" + lookupWord + "&dic=" + lang;
+    var iframe = "<iframe target='_top' width='100%' height='100%' src=" + definitionURL + "></iframe>";
+    $(".control-sidebar").html(iframe);
+  } 
+  
+  //otherwise just show the sidebar with the previous lookup still there
 
   $('#open_right_sidebar').show();
-  $(".control-sidebar").html("<h1>Loading Dictionary...</h1>");
-
-  var iframe = "<iframe target='_top' width='100%' height='100%' src=" + definitionURL + "></iframe>";
-
-  $(".control-sidebar").html(iframe);
-
   $('#open_right_sidebar').html('<i class="fa fa-hand-o-right"> Hide Dictionary</i>');
-  makeNavMenuFixed();
-
   
+  makeNavMenuFixed();
 
 
   // if (isMobile()) {
@@ -221,7 +223,7 @@ var hideDictionary = function() {
   $('.control-sidebar').removeClass('control-sidebar-open');
   $('#open_right_sidebar').html('<i class="fa fa-hand-o-left"> Show Dictionary</i>');
   makeNavMenuStatic();
-  if (playerWasPlayingAndIsNowTemporarilyPaused) {playAudio();}
+  // if (playerWasPlayingAndIsNowTemporarilyPaused) {playAudio();}
 };
 
 var hideLeftSideBar = function() {

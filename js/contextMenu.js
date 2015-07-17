@@ -84,20 +84,24 @@ $(document).ready(function() {
   //Key Bindings
 
   $(document).on('keydown', null, 'h', function() {
-
-    contextMenu_action_highlight();
-    $(currentlySelectedWord).contextMenu("hide");
-
+    if ($(".context-menu-list").css("display") === "block") {
+      $(currentlySelectedWord).contextMenu("hide");
+      contextMenu_action_highlight();      
+    }
   });
 
   $(document).on('keydown', null, 'd', function() {
-    contextMenu_action_lookup();
-    $(currentlySelectedWord).contextMenu("hide");
+    if ($(".context-menu-list").css("display") === "block") {
+      $(currentlySelectedWord).contextMenu("hide");
+      contextMenu_action_lookup();      
+    }
   });
 
   $(document).on('keydown', null, 'w', function() {
-    contextMenu_action_defineByUser();
-    $(currentlySelectedWord).contextMenu("hide");
+    if ($(".context-menu-list").css("display") === "block") {
+      $(currentlySelectedWord).contextMenu("hide");
+      contextMenu_action_defineByUser();      
+    }
   });
 
 });

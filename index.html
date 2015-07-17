@@ -40,26 +40,7 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<!--
-  BODY TAG OPTIONS:
-  =================
-  Apply one or more of the following classes to get the
-  desired effect
-  |---------------------------------------------------------|
-  | SKINS         | skin-blue                               |
-  |               | skin-black                              |
-  |               | skin-purple                             |
-  |               | skin-yellow                             |
-  |               | skin-red                                |
-  |               | skin-green                              |
-  |---------------------------------------------------------|
-  |LAYOUT OPTIONS | fixed                                   |
-  |               | layout-boxed                            |
-  |               | layout-top-nav                          |
-  |               | sidebar-collapse                        |
-  |               | sidebar-mini                            |
-  |---------------------------------------------------------|
-  -->
+
 
 <body class="skin-blue sidebar-mini">
   <div id="orientationWarning">
@@ -95,7 +76,7 @@
               <a class="dv_a_no_hover">
                 <i class="fa" id="control_speed">
                   <!-- <span class="control_speed_display">Normal Speed</span> -->
-                  <div id="speed_slider"><span class="speed_slider_status">Normal Speed</span></div></i>
+                  <span id="speed_slider"><span class="speed_slider_status">Normal Speed</span></span></i>
               </a>
             </li>
             <li class="percent_indicator">
@@ -259,120 +240,124 @@
     <footer class="main-footer">
       <!-- To the right -->
       <div class="pull-right hidden-xs">
-        Made with <i class="fa fa-heart"></i> in Busan by a <a href="http://WebDeveloperInKorea.com">Web Developer Named Dima</a></strong>
+        Made with <i class="fa fa-heart"></i> in Busan by a <a href="http://WebDeveloperInKorea.com">Web Developer Named <strong>Dima</strong></a>
       </div>
       <!-- Default to the left -->
       <strong>Copyright &copy; 2015</strong>
     </footer>
 
     <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-      <div class="dictionary_embed"></div>
-      
-      <ul class="control-sidebar-menu">
+    <div class="nano">
+      <div class="nano-content">
+        <aside class="control-sidebar control-sidebar-dark">
+          <div class="dictionary_embed"></div>
 
-      </ul>
+          <ul class="control-sidebar-menu">
 
-      <!-- Add the sidebar's background. This div must be placed
+          </ul>
+
+          <!-- Add the sidebar's background. This div must be placed
            immediately after the control sidebar -->
-      <div class="control-sidebar-bg"></div>
-  </div>
-  <!-- ./wrapper -->
+          <div class="control-sidebar-bg"></div>
+        </aside>
+      </div>
+    </div>
 
-  <!-- dv modals -->
+    <!-- dv modals -->
 
-  <div class="modal fade" id="modal_definitions">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-          <h4 class="modal-title">Please enter your definition below</h4>
-        </div>
-        <div class="modal-body">
-          <div id="dv_definitions_userentry">
-            <input type="text" id="submit_definition_box" class="submit_definition_box" placeholder="Type your own definition here">
-            </input>
+    <div class="modal fade" id="modal_definitions">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">Please enter your definition below</h4>
+          </div>
+          <div class="modal-body">
+            <div id="dv_definitions_userentry">
+              <input type="text" id="submit_definition_box" class="submit_definition_box" placeholder="Type your own definition here" />
 
+
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger remove_definition_button">This Word Needs No Definition</button>
+            <button type="button" class="btn btn-success submit_definition_button">Save This Definition</button>
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger remove_definition_button">This Word Needs No Definition</button>
-          <button type="button" class="btn btn-success submit_definition_button">Save This Definition</button>
-        </div>
+        <!-- /.modal-content -->
       </div>
-      <!-- /.modal-content -->
+      <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal-dialog -->
+    <!-- /.modal -->
+
+    <!-- //dv modals -->
+
+    <!-- REQUIRED JS SCRIPTS -->
+
+    <!-- jQuery 2.1.4 -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.2 JS -->
+    <script src="bootstrap/bootstrap.min.js" type="text/javascript"></script>
+
+    <!-- AdminLTE App -->
+    <script src="bootstrap/app.min.js" type="text/javascript"></script>
+
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nanoscroller/0.8.7/javascripts/jquery.nanoscroller.min.js" type="text/javascript"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nanoscroller/0.8.7/javascripts/jquery.nanoscroller.js" type="text/javascript"></script>
+
+
+    <script type="text/javascript" src="http://vjs.zencdn.net/4.12/video.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lettering.js/0.7.0/jquery.lettering.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript" src="js/definitions.js"></script>
+    <script type="text/javascript" src="js/getdata.js"></script>
+    <script type="text/javascript" src="js/mediaplayer.js"></script>
+    <script type="text/javascript" src="js/jquery.word-break-keep-all.min.js"></script>
+    <script type="text/javascript" src="js/jquery.hotkeys.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tooltipster/3.0.5/js/jquery.tooltipster.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/1.6.5/jquery.contextMenu.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/6.2.0/jquery.nouislider.min.js"></script>
+
+    <script type="text/javascript" src="js/contextMenu.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+    <script type="text/javascript">
+      WebFontConfig = {
+        custom: {
+          families: ['Nanum Gothic'],
+          urls: ['http://fonts.googleapis.com/earlyaccess/nanumgothic.css']
+        }
+      };
+      (function() {
+        var wf = document.createElement('script');
+        wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+          '://ajax.googleapis.com/ajax/libs/webfont/1.4.10/webfont.js';
+        wf.type = 'text/javascript';
+        wf.async = 'true';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(wf, s);
+      })();
+    </script>
+
+    <script>
+      (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+      ga('create', 'UA-58266564-1', 'auto');
+      ga('send', 'pageview');
+    </script>
   </div>
-  <!-- /.modal -->
-
-  <!-- //dv modals -->
-
-  <!-- REQUIRED JS SCRIPTS -->
-
-  <!-- jQuery 2.1.4 -->
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  <!-- Bootstrap 3.3.2 JS -->
-  <script src="bootstrap/bootstrap.min.js" type="text/javascript"></script>
-  <!-- SlimScroll -->
-  <!-- <script src="bootstrap/jquery.slimscroll.min.js" type="text/javascript"></script> -->
-  <!-- AdminLTE App -->
-  <script src="bootstrap/app.min.js" type="text/javascript"></script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nanoscroller/0.8.7/javascripts/jquery.nanoscroller.min.js" type="text/javascript"></script>
-
-
-  <script type="text/javascript" src="http://vjs.zencdn.net/4.12/video.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lettering.js/0.7.0/jquery.lettering.min.js"></script>
-  <script type="text/javascript" src="js/script.js"></script>
-  <script type="text/javascript" src="js/definitions.js"></script>
-  <script type="text/javascript" src="js/getdata.js"></script>
-  <script type="text/javascript" src="js/mediaplayer.js"></script>
-  <script type="text/javascript" src="js/jquery.word-break-keep-all.min.js"></script>
-  <script type="text/javascript" src="js/jquery.hotkeys.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tooltipster/3.0.5/js/jquery.tooltipster.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/1.6.5/jquery.contextMenu.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/6.2.0/jquery.nouislider.min.js"></script>
-
-  <script type="text/javascript" src="js/contextMenu.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
-  <script type="text/javascript">
-    WebFontConfig = {
-      custom: {
-        families: ['Nanum Gothic'],
-        urls: ['http://fonts.googleapis.com/earlyaccess/nanumgothic.css']
-      }
-    };
-    (function() {
-      var wf = document.createElement('script');
-      wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
-        '://ajax.googleapis.com/ajax/libs/webfont/1.4.10/webfont.js';
-      wf.type = 'text/javascript';
-      wf.async = 'true';
-      var s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(wf, s);
-    })();
-  </script>
-
-  <script>
-    (function(i, s, o, g, r, a, m) {
-      i['GoogleAnalyticsObject'] = r;
-      i[r] = i[r] || function() {
-        (i[r].q = i[r].q || []).push(arguments)
-      }, i[r].l = 1 * new Date();
-      a = s.createElement(o),
-        m = s.getElementsByTagName(o)[0];
-      a.async = 1;
-      a.src = g;
-      m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
-    ga('create', 'UA-58266564-1', 'auto');
-    ga('send', 'pageview');
-  </script>
 </body>
 
 </html>

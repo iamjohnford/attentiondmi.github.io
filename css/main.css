@@ -24,6 +24,7 @@ a.dv_a_no_hover:hover {
 #speed_slider {
   color: rgb(54, 127, 169);
   text-align: center;
+    display: block;
 }
 
 .noUi-handle {

@@ -11,6 +11,36 @@ body:not(.pace-done) >:not(.pace), body:not(.pace-done):before, body:not(.pace-d
 }
 
 
+/*** Settings Menu ***/
+
+a.dv_a_no_hover:hover {
+  background: transparent !important;
+}
+
+#control_speed {
+  width: 150px;
+}
+
+#speed_slider {
+  color: rgb(54, 127, 169);
+  text-align: center;
+}
+
+.noUi-handle {
+  background: transparent !important;
+  border: 2px solid #367FA9 !important;
+    cursor: ew-resize !important;
+}
+.noUi-handle:after,.noUi-handle:before{
+  display:none !important;
+}
+.speed_slider_status {
+  position: fixed;
+  width: 100%;
+  left: 0;
+}
+
+
 /*** Context Menu ***/
 
 .context-menu-list {
@@ -38,7 +68,7 @@ body:not(.pace-done) >:not(.pace), body:not(.pace-done):before, body:not(.pace-d
 .tooltipster-default {
   background: #3c8dbc !important;
   border: 3px solid white !important;
-  border-bottom:5px solid white !important;
+  border-bottom: 5px solid white !important;
 }
 
 .tooltipster-default .tooltipster-content {
@@ -119,7 +149,7 @@ span[class^="line"]:hover {
   display: none;
 }
 
-#controls {
+#controls-footer, #controls, #settings {
   display: none;
 }
 
@@ -161,8 +191,41 @@ input#submit_definition_box {
 }
 
 
-/*** Miscellaneous ***/
+/***** FOOTER FOR CONTROLS ******/
 
-a.dv_a_no_hover:hover {
-  background: transparent !important;
+.controls-footer {
+  position: fixed;
+  bottom: 5px;
+  color: white;
+  z-index: 10000;
+  left: 50%;
+  transform: translate(-50%, 0);
+  -webkit-transform: translate(-50%, 0);
+}
+
+#controls {
+  display: inline-block;
+}
+
+#controls ol, #controls ul {
+  margin: 0px !important;
+  padding: 0px !important;
+}
+
+#controls li {
+  display: inline-block !important;
+}
+
+#controls a {
+  padding: 10px !important;
+  background: rgba(60, 141, 188, 1);
+  color: white;
+  font-weight: 900;
+  margin: 1px;
+  border-radius: 10px;
+}
+
+#controls a:hover {
+  background-color: rgb(30, 40, 44);
+  color: rgb(149, 246, 255);
 }

@@ -1,3 +1,46 @@
+$(document).ready(function() {
+  slider = $("#speed_slider").noUiSlider({
+    start: [3],
+    range: {
+      'min': 1,
+      'max': 5
+    },
+    step: 1,
+    scale: [1, 5],
+  });
+
+  slider.on('change', function() {
+
+
+    var speedVal = Math.round(slider.val());
+
+    console.log("The val is: " + speedVal);
+
+    switch (speedVal) {
+      case 5.00:
+        $(".speed_slider_status").text("Lightning Speed");
+        playbackSpeed(1.4);
+        break;
+      case 4.00:
+        $(".speed_slider_status").text("Fast Speed");
+        playbackSpeed(1.2);
+        break;
+      case 3.00:
+        $(".speed_slider_status").text("Normal Speed");
+        playbackSpeed(1.0);
+        break;
+      case 2.00:
+        $(".speed_slider_status").text("Slow Speed");
+        playbackSpeed(0.8);
+        break;
+      case 1.00:
+        $(".speed_slider_status").text("Crawling Speed");
+        playbackSpeed(0.6);
+        break;
+    }
+  });
+});
+
 videojs("the_media", {}, function() {
   // Player (this) is initialized and ready.
   dvPlayer = this;
@@ -64,8 +107,12 @@ skipNumSeconds = function(numSeconds) {
   console.log("Skipping " + numSeconds + " seconds ;)");
 };
 
-nowPlaying = function(){  
-  return ! dvPlayer.paused();
+playbackSpeed = function(speedVal) {
+  dvPlayer.playbackRate(speedVal);
+};
+
+nowPlaying = function() {
+  return !dvPlayer.paused();
 };
 
 // ************* CLICK EVENTS *************

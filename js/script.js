@@ -29,7 +29,8 @@ $(document).ready(function() {
     $('.content-header').html("<h1>" + title + "</h1>");
     loadMediaPlayer(media_url);
 
-    $("#controls").show();
+    $(".controls-footer").show();
+    $("#settings").show();
 
     hideLeftSideBar();
     hideDictionary();

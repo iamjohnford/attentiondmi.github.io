@@ -30,6 +30,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/tooltipster/3.0.5/css/tooltipster.min.css" media="all" rel="stylesheet" type="text/css" />
   <link href="http://vjs.zencdn.net/4.12/video-js.css" rel="stylesheet" type="text/css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.nanoscroller/0.8.7/css/nanoscroller.min.css" rel="stylesheet" type="text/css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/6.2.0/jquery.nouislider.min.css" rel="stylesheet" type="text/css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/1.6.5/jquery.contextMenu.min.css" rel="stylesheet" type="text/css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -89,7 +90,23 @@
 
         <!-- Navbar Right Menu -->
         <div class="navbar-custom-menu">
-          <ul id="controls" class="nav navbar-nav">
+          <ul id="settings" class="nav navbar-nav">
+            <li class="speed_indicator">
+              <a class="dv_a_no_hover">
+                <i class="fa" id="control_speed">
+                  <!-- <span class="control_speed_display">Normal Speed</span> -->
+                  <div id="speed_slider"><span class="speed_slider_status">Normal Speed</span></div></i>               
+              </a>
+            </li>
+            <li class="percent_indicator">
+              <a class="dv_a_no_hover"><i class="fa fa-flag-checkered fa-border" id="percent_done"> 0% Listened</i></a>
+            </li>
+            
+            <li>
+              <a id="open_right_sidebar" href="#" style="display:none;"><i class="fa fa-hand-o-right"> Hide Dictionary</i></a>
+            </li>
+          </ul>
+          <!-- <ul id="controls" class="nav navbar-nav">
 
             <li><a title="Hint: pressing [CTRL + 3] on your keyboard is the same as clicking this button" href="#" class="player_control" id="control_back30"><i class="fa fa-fast-backward faa-passing animated-hover"></i> 30<span class="control_label"> secs</span></a></li>
             <li><a href="#" title="Hint: pressing [CTRL + 1] on your keyboard is the same as clicking this button" class="player_control" id="control_back10"><i class="fa fa-backward"></i> 10<span class="control_label"> secs</span></a></li>
@@ -98,16 +115,16 @@
             <li><a href="#" title="Hint: pressing [CTRL + SHIFT + 3] on your keyboard is the same as clicking this button" class="player_control" id="control_forward30">30<span class="control_label"> secs</span> <i class="fa fa-fast-forward"></i></a></li>
 
 
-            <!-- Control Sidebar Toggle Button -->
+            Control Sidebar Toggle Button
             <li class="percent_indicator">
               <a class="dv_a_no_hover"><i class="fa fa-flag-checkered fa-border" id="percent_done"> 0% Listened</i></a>
             </li>
 
-            <!-- Control Sidebar Toggle Button -->
+            Control Sidebar Toggle Button
             <li>
               <a id="open_right_sidebar" href="#" style="display:none;"><i class="fa fa-hand-o-right"> Hide Dictionary</i></a>
             </li>
-          </ul>
+          </ul> -->
         </div>
       </nav>
     </header>
@@ -133,19 +150,22 @@
           <ul class="sidebar-menu">
             <li class="treeview">
               <a class="difficulty_level" href="#">
-                <i class="fa fa-fw fa-child"></i> <span> Beginner</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <i class="fa fa-fw fa-child"></i>
+                <span> Beginner</span> <i class="fa fa-angle-left pull-right"></i></a>
               <ul class="treeview-menu beginner">
               </ul>
             </li>
             <li class="treeview active">
               <a class="difficulty_level" href="#">
-                <i class="fa fa-fw fa-male"></i> <span>Intermediate</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <i class="fa fa-fw fa-male"></i>
+                <span>Intermediate</span> <i class="fa fa-angle-left pull-right"></i></a>
               <ul class="treeview-menu intermediate">
               </ul>
             </li>
             <li class="treeview">
               <a class="difficulty_level" href="#">
-                <i class="fa fa-fw fa-street-view"></i> <span>Advanced</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <i class="fa fa-fw fa-street-view"></i>
+                <span>Advanced</span> <i class="fa fa-angle-left pull-right"></i></a>
               <ul class="treeview-menu advanced">
               </ul>
             </li>
@@ -222,21 +242,34 @@
     </div>
     <!-- /.content-wrapper -->
 
+    <div class="controls-footer" style="display:none;">
+      <!-- <div class="navbar-custom-menu"> -->
+      <ul id="controls" class="nav navbar-nav">
+
+        <li><a title="Hint: pressing [CTRL + 3] on your keyboard is the same as clicking this button" href="#" class="player_control" id="control_back30"><i class="fa fa-fast-backward faa-passing animated-hover"></i> 30<span class="control_label"> secs</span></a></li>
+        <li><a href="#" title="Hint: pressing [CTRL + 1] on your keyboard is the same as clicking this button" class="player_control" id="control_back10"><i class="fa fa-backward"></i> 10<span class="control_label"> secs</span></a></li>
+        <li><a href="#" title="Hint: pressing [spacebar] on your keyboard is the same as clicking this button" class="player_control" id="control_playpause"><i id="play_pause_button" class="fa fa-pause faa-pulse animated"></i> Pause</a></li>
+        <li><a href="#" title="Hint: pressing [CTRL + SHIFT + 1] on your keyboard is the same as clicking this button" class="player_control" id="control_forward10">10<span class="control_label"> secs</span> <i class="fa fa-forward"></i></a></li>
+        <li><a href="#" title="Hint: pressing [CTRL + SHIFT + 3] on your keyboard is the same as clicking this button" class="player_control" id="control_forward30">30<span class="control_label"> secs</span> <i class="fa fa-fast-forward"></i></a></li>
+
+      </ul>
+      <!-- </div> -->
+    </div>
     <!-- Main Footer -->
     <footer class="main-footer">
       <!-- To the right -->
       <div class="pull-right hidden-xs">
-        Made with <i class="fa fa-heart"></i> in Busan by a Web Developer named Dima
+        Made with <i class="fa fa-heart"></i> in Busan by a <a href="http://WebDeveloperInKorea.com">Web Developer Named Dima</a></strong>
       </div>
       <!-- Default to the left -->
-      <strong>Copyright &copy; 2015 <a href="http://WebDeveloperInKorea.com">WebDeveloperInKorea.com</a>.</strong> All rights reserved.
+      <strong>Copyright &copy; 2015</strong>
     </footer>
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
 
       <ul class="control-sidebar-menu">
-        
+
       </ul>
 
       <!-- Add the sidebar's background. This div must be placed
@@ -259,8 +292,8 @@
         <div class="modal-body">
           <div id="dv_definitions_userentry">
             <input type="text" id="submit_definition_box" class="submit_definition_box" placeholder="Type your own definition here">
-          </input>
-            
+            </input>
+
           </div>
         </div>
         <div class="modal-footer">
@@ -301,6 +334,8 @@
   <script type="text/javascript" src="js/jquery.hotkeys.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tooltipster/3.0.5/js/jquery.tooltipster.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/1.6.5/jquery.contextMenu.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/6.2.0/jquery.nouislider.min.js"></script>
+  
   <script type="text/javascript" src="js/contextMenu.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
   <script type="text/javascript">

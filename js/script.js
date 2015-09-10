@@ -181,7 +181,8 @@ var showDictionary = function(lookupWord) {
   //   playerWasPlayingAndIsNowTemporarilyPaused = false;
   // }
   
-  $('.control-sidebar').addClass('control-sidebar-open');
+  // $('.control-sidebar').addClass('control-sidebar-open');
+  $.AdminLTE.controlSidebar.open();
   
   if (lookupWord !== undefined && lookupWord.length > 0) {
     // var lang = "ee";
@@ -217,7 +218,8 @@ var showDictionary = function(lookupWord) {
 
 var hideDictionary = function() {
 
-  $('.control-sidebar').removeClass('control-sidebar-open');
+  // $('.control-sidebar').removeClass('control-sidebar-open');
+  $.AdminLTE.controlSidebar.close()
   $('#open_right_sidebar').html('<i class="fa fa-hand-o-left"> Show Dictionary</i>');
   makeNavMenuStatic();
   // if (playerWasPlayingAndIsNowTemporarilyPaused) {playAudio();}
